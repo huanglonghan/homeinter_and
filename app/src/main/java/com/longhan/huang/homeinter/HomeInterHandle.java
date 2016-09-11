@@ -49,6 +49,7 @@ public class HomeInterHandle extends Handler {
 
     private void receiveDataHandle(String retMsg) {
         JSONObject jsonObject = null;
+
         try {
             jsonObject = new JSONObject(retMsg);
         } catch (JSONException e) {
@@ -76,6 +77,7 @@ public class HomeInterHandle extends Handler {
     }
 
     private void onMessage(JSONObject msg) {
+
         switch (msg.optString("opt")) {
             case "updateLocation":
                 onUpdateLocation(msg);
@@ -111,11 +113,11 @@ public class HomeInterHandle extends Handler {
             location.setLongitude(lon);
             location.setAccuracy(accuracy);
             location.setTime(time);
-            mHomeInterService.setUserMetaDatas(uid, uid,location);
+            mHomeInterService.setUserMetaDatas(uid, uid, location);
         }
     }
 
-    public void onClearInvalidUser(JSONObject msg){
+    public void onClearInvalidUser(JSONObject msg) {
         JSONArray jsonArray = msg.optJSONArray("content");
         if (jsonArray == null) {
             return;

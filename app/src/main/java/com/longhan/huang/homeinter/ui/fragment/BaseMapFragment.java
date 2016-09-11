@@ -31,7 +31,7 @@ public class BaseMapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_map, container, false);
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
         mapView = (MapView) view.findViewById(R.id.amap);
         mapView.onCreate(savedInstanceState);
         mMap = mapView.getMap();
@@ -40,8 +40,7 @@ public class BaseMapFragment extends Fragment {
     }
 
 
-
-    private void initMap(){
+    private void initMap() {
         UiSettings uiSettings = mMap.getUiSettings();
         uiSettings.setLogoPosition(AMapOptions.LOGO_POSITION_BOTTOM_RIGHT);
         uiSettings.setZoomPosition(AMapOptions.ZOOM_POSITION_RIGHT_CENTER);

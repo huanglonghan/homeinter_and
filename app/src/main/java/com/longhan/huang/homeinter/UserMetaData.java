@@ -10,13 +10,13 @@ import com.amap.api.maps2d.model.LatLng;
 public class UserMetaData {
 
     private Location mLocation = new Location("lbs");
-    private boolean mIsSelf =false;
+    private boolean mIsSelf = false;
     private String mNickName;
     private String mUid;
     private String mTCode;
 
-    public LatLng getLatLon(){
-        return new LatLng(mLocation.getLatitude(),mLocation.getLongitude());
+    public LatLng getLatLon() {
+        return new LatLng(mLocation.getLatitude(), mLocation.getLongitude());
     }
 
     public String getUid() {
@@ -26,7 +26,6 @@ public class UserMetaData {
     public void setUid(String mUid) {
         this.mUid = mUid;
     }
-
 
 
     public String getNickName() {

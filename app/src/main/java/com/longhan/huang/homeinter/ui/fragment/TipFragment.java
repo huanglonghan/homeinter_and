@@ -65,7 +65,7 @@ public class TipFragment extends DialogFragment {
             mMobile = getArguments().getString(ARG_MOBILE);
             mPasswd = getArguments().getString(ARG_PASSWD);
         }
-        Log.e("tipfragment","tipfragment");
+        Log.e("tipfragment", "tipfragment");
         new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... params) {

@@ -142,7 +142,7 @@ public class MapFragment extends BaseMapFragment implements AMap.OnMarkerClickLi
 
         mDrawerLayout.addDrawerListener(this);
         mDrawerLayout.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus&& MainActivity.isFirstOpen==0){
+            if (hasFocus && MainActivity.isFirstOpen == 0) {
                 mDrawerLayout.openDrawer(Gravity.LEFT);
                 MainActivity.isFirstOpen++;
             }
@@ -305,7 +305,6 @@ public class MapFragment extends BaseMapFragment implements AMap.OnMarkerClickLi
     }
 
 
-
     @Override
     public void onPause() {
         super.onPause();
@@ -341,7 +340,6 @@ public class MapFragment extends BaseMapFragment implements AMap.OnMarkerClickLi
         }
 
     }
-
 
 
     protected void initShowAllMarker() {

@@ -30,7 +30,7 @@ public class MainActivity extends FragmentActivity implements MapFragment.OnStop
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)!=PackageManager.PERMISSION_GRANTED) {
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -38,10 +38,10 @@ public class MainActivity extends FragmentActivity implements MapFragment.OnStop
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            ActivityCompat.requestPermissions(this,new String[]{    "android.permission.ACCESS_COARSE_LOCATION",
+            ActivityCompat.requestPermissions(this, new String[]{"android.permission.ACCESS_COARSE_LOCATION",
                     "android.permission.ACCESS_FINE_LOCATION",
                     "android.permission.READ_PHONE_STATE",
-                    "android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"},123);
+                    "android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"}, 123);
             return;
         }
 

@@ -269,10 +269,11 @@ public class SidebarFragment extends Fragment {
     }
 
     final int LOGIN_REQUEST_CODE = 0x01;
+
     @OnClick(R.id.login_btn)
     public void onClick() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivityForResult(intent,LOGIN_REQUEST_CODE);
+        startActivityForResult(intent, LOGIN_REQUEST_CODE);
     }
 
     @Override

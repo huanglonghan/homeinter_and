@@ -78,7 +78,6 @@ public class LocationService extends Service implements AMapLocationListener {
     Criteria criteria;
 
 
-
     public ServerStatus getServiceStatus() {
         return mServiceStatus;
     }
@@ -122,26 +121,28 @@ public class LocationService extends Service implements AMapLocationListener {
             return LocationService.this.getServiceStatus();
         }
 
-        public boolean sendMsg(String msg){
-            if (TCPCommunication !=null){
+        public boolean sendMsg(String msg) {
+            if (TCPCommunication != null) {
                 TCPCommunication.sendMsg(msg);
                 return true;
             }
             return false;
         }
 
-        public String getUid(){
-           return LocationService.this.getUid();
+        public String getUid() {
+            return LocationService.this.getUid();
         }
-        public String getNickname(){
+
+        public String getNickname() {
             return LocationService.this.getNickName();
         }
-        public void setNickname(String nickname){
-                synchronized (userMetaDatas) {
-                    UserMetaData userData;
-                        userData = userMetaDatas.get(mUid);
-                        userData.setNickName(nickname);
-                    }
+
+        public void setNickname(String nickname) {
+            synchronized (userMetaDatas) {
+                UserMetaData userData;
+                userData = userMetaDatas.get(mUid);
+                userData.setNickName(nickname);
+            }
         }
     }
 
@@ -157,22 +158,22 @@ public class LocationService extends Service implements AMapLocationListener {
 
     public UserMetaData getUserMetaDatas(String name) {
         UserMetaData userMetaData;
-        synchronized(userMetaDatas) {
+        synchronized (userMetaDatas) {
             userMetaData = userMetaDatas.get(name);
         }
         return userMetaData;
     }
 
-    public void setUserMetaDatas(String name,String uid, Location location) {
+    public void setUserMetaDatas(String name, String uid, Location location) {
         synchronized (userMetaDatas) {
             UserMetaData userData;
             if (!userMetaDatas.containsKey(name)) {
                 userData = new UserMetaData(location);
-                if (userData.getUid()==null){
+                if (userData.getUid() == null) {
                     userData.setUid(uid);
                 }
                 String nickName = userData.getNickName();
-                if(nickName==null||nickName.equals("")||nickName.equals("正在获取昵称..")){
+                if (nickName == null || nickName.equals("") || nickName.equals("正在获取昵称..")) {
                     userData.setNickName(getUserNickName(uid));
                 }
                 userMetaDatas.put(name, userData);
@@ -235,7 +236,7 @@ public class LocationService extends Service implements AMapLocationListener {
         if (errorCode == ErrorCode.SUCCESS) {
             JSONObject result = jsonObject.optJSONObject("result");
             if (result != null) {
-                 return result.optString("nickname");
+                return result.optString("nickname");
             }
         }
         return nickName;
@@ -243,9 +244,9 @@ public class LocationService extends Service implements AMapLocationListener {
 
     public void removeUserMetaDatas(LinkedList<String> uIds) {
         synchronized (userMetaDatas) {
-            Set<String> keys =userMetaDatas.keySet();
-            for (String key:keys) {
-                if (!uIds.contains(key)&&!key.equals(getUid())) {
+            Set<String> keys = userMetaDatas.keySet();
+            for (String key : keys) {
+                if (!uIds.contains(key) && !key.equals(getUid())) {
                     userMetaDatas.remove(key);
                 }
             }
@@ -254,7 +255,7 @@ public class LocationService extends Service implements AMapLocationListener {
 
     public boolean userDataContainsKey(String name) {
         boolean isContain;
-        synchronized(userMetaDatas) {
+        synchronized (userMetaDatas) {
             isContain = userMetaDatas.containsKey(name);
         }
         return isContain;
@@ -262,8 +263,8 @@ public class LocationService extends Service implements AMapLocationListener {
 
     public Set<String> getUserList() {
         Set<String> keys;
-        synchronized(userMetaDatas) {
-            keys=userMetaDatas.keySet();
+        synchronized (userMetaDatas) {
+            keys = userMetaDatas.keySet();
         }
         return keys;
     }
@@ -302,9 +303,9 @@ public class LocationService extends Service implements AMapLocationListener {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    public enum ServerStatus{
-        initUserDataAfter,initUserDataBefore,initLocationAfter,initLocationBefore,initConnectAfter,
-        initConnectBefore,locationSuccess,connectAndLocationSuccess
+    public enum ServerStatus {
+        initUserDataAfter, initUserDataBefore, initLocationAfter, initLocationBefore, initConnectAfter,
+        initConnectBefore, locationSuccess, connectAndLocationSuccess
     }
 
 
@@ -313,9 +314,9 @@ public class LocationService extends Service implements AMapLocationListener {
 
         Notification.Builder builder = new Notification.Builder(this);
         PendingIntent contentIntent =
-                PendingIntent.getActivity(this,0,
+                PendingIntent.getActivity(this, 0,
                         new Intent(this,
-                                MainActivity.class),0);
+                                MainActivity.class), 0);
         builder.setContentIntent(contentIntent);
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setTicker("HomeInter 正在后台运行");
@@ -467,12 +468,12 @@ public class LocationService extends Service implements AMapLocationListener {
         }
         stopForeground(true);
         Context context = getApplicationContext();
-        if(!Tools.getServerState(context, LocationService.HomeInterServicePackName)){
+        if (!Tools.getServerState(context, LocationService.HomeInterServicePackName)) {
             context.startService(new Intent(context, LocationService.class));
         }
 
         LocationService.startConnectAndLocationServer(context);
-        if(!Tools.getServerState(context,MonitorService.MonitorServicePackName)){
+        if (!Tools.getServerState(context, MonitorService.MonitorServicePackName)) {
             context.startService(new Intent(context, MonitorService.class));
         }
         super.onDestroy();
