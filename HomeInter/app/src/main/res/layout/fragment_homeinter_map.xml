@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:openDraw="open">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.amap.api.maps2d.MapView
+            android:id="@+id/amap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/linearLayout2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_alignParentTop="true"
+            android:id="@+id/linearLayout2"
+            android:background="?colorPrimary"
+            android:layout_margin="2dp"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:elevation="3dp"
+            android:weightSum="1">
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/sidebar"
+                android:layout_weight="0.1" />
+            <TextView
+                android:layout_marginLeft="6dp"
+                android:layout_marginStart="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/showStatus"
+                android:layout_gravity="center"
+                android:text="" />
+        </LinearLayout>
+
+        <ImageButton
+            android:scaleType="centerInside"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:id="@+id/showAll"
+            android:background="@drawable/button_only_one_normal"
+            android:src="@drawable/show_all"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_below="@id/linearLayout2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/bt_show_all"/>
+        <ImageButton
+            android:scaleType="centerInside"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:id="@+id/showSelf"
+            android:background="@drawable/button_only_one_normal"
+            android:src="@drawable/show_self"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_below="@+id/showAll"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/bt_show_self" />
+
+    </RelativeLayout>
+
+    <FrameLayout android:layout_width="match_parent"        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="@color/common_action_bar_splitter"
+        android:fitsSystemWindows="true"
+        android:tag="left"
+        android:focusable="true"
+        android:clickable="true"
+        android:id="@+id/map_fragment_sidebar"/>
+
+
+</android.support.v4.widget.DrawerLayout>

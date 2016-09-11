@@ -1,0 +1,44 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:background="@android:color/transparent">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="?colorPrimary"
+        android:text="@string/login_title"
+        android:id="@+id/login_btn"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nick_name_default"
+        android:id="@+id/nick_name"
+        android:background="@drawable/selector_nick_name"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:lines="1"
+        android:maxLength="6"
+        android:visibility="gone"
+        android:inputType="textPersonName"/>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/wait"
+        android:visibility="gone"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nick_name_confirm"
+        android:visibility="gone"
+        android:id="@+id/nick_name_confirm"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nick_name_cancel"
+        android:visibility="gone"
+        android:id="@+id/nick_name_cancel"/>
+</LinearLayout>

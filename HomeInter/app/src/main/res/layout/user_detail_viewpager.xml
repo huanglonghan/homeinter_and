@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <huang.longhan.com.homeinter.component.ViewPagerIndicator
+        android:id="@+id/viewpager_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:indicator_color="?colorPrimary"
+        app:indicator_selected_title_color="#000000" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/detail_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/viewpager_indicator"
+        android:background="#eeeeee" />
+
+
+</RelativeLayout>

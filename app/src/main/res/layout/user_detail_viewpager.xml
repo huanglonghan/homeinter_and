@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.TabLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent="100%"
+        app:layout_heightPercent="35%"
+        android:id="@+id/tab_view"
+        app:tabMode="scrollable"
+        app:tabGravity="center"
+        android:background="@color/wallet_bright_foreground_holo_dark"
+        app:tabIndicatorColor="@color/colorPrimaryDark"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabTextColor="@color/wallet_bright_foreground_holo_light"/>
+    <!--<com.longhan.huang.homeinter.component.ViewPagerIndicator-->
+        <!--android:id="@+id/viewpager_indicator"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--app:indicator_color="?colorPrimary"-->
+        <!--app:indicator_selected_title_color="#000000" />-->
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_widthPercent="100%"
+        app:layout_heightPercent="65%"
+        android:id="@+id/detail_viewpager"
+        android:layout_alignParentBottom="true"
+        android:background="#eeeeee"
+        android:layout_below="@+id/tab_view" />
+
+
+</android.support.percent.PercentRelativeLayout>
