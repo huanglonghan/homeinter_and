@@ -5,12 +5,12 @@ apply plugin: 'me.tatarka.retrolambda'
 
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '24.0.0'
+    compileSdkVersion 24
+    buildToolsVersion '24.0.2'
     defaultConfig {
         applicationId "com.longhan.huang.homeinter"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -32,7 +32,6 @@ android {
     }
 
     dexOptions {
-        incremental true
         javaMaxHeapSize "4g"
     }
 
@@ -44,6 +43,7 @@ android {
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
+
 }
 
 dependencies {
@@ -52,10 +52,10 @@ dependencies {
     compile files('libs/AMap_2DMap_V2.8.0_20151231.jar')
     compile files('libs/AMap_Location_v2.3.0_20160112.jar')
     compile files('libs/open_sdk_r5509_lite.jar')
-    compile 'com.android.support:appcompat-v7:24.1.1'
-    compile 'com.android.support:support-v4:24.1.1'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:support-v4:24.2.1'
     compile 'com.google.android.gms:play-services-appindexing:9.4.0'
-    compile 'com.android.support:design:24.1.1'
+    compile 'com.android.support:design:24.2.1'
     compile 'com.google.android.gms:play-services:9.4.0'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.yolanda.nohttp:nohttp:1.0.4'
@@ -72,7 +72,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:9.4.0'
     compile 'com.firebase:firebase-client-android:2.3.1'
     compile 'com.google.android.gms:play-services-gcm:9.4.0'
-    compile 'com.android.support:percent:24.1.1'
+    compile 'com.android.support:percent:24.2.1'
     //apt "org.androidannotations:androidannotations:$AAVersion"
 
     //compile "org.androidannotations:androidannotations-api:$AAVersion"

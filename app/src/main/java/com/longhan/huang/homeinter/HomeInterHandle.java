@@ -44,6 +44,8 @@ public class HomeInterHandle extends Handler {
                 String retMsg = bundle.getString(TCPConnect.RECEIVE_DATA);
                 receiveDataHandle(retMsg);
                 break;
+            default:
+                break;
         }
     }
 
@@ -52,7 +54,8 @@ public class HomeInterHandle extends Handler {
 
         try {
             jsonObject = new JSONObject(retMsg);
-        } catch (JSONException e) {
+        }
+        catch (JSONException e) {
             e.printStackTrace();
         }
         if (jsonObject == null) {
@@ -71,6 +74,8 @@ public class HomeInterHandle extends Handler {
                     return;
                 }
                 onMessage(result);
+                break;
+            default:
                 break;
         }
 
