@@ -46,7 +46,7 @@ public class ViewPagerIndicator extends LinearLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ViewPagerIndicator);
         mIndicatorColor = typedArray.getColor(R.styleable.ViewPagerIndicator_indicator_color, Color.RED);
         mSelectedTitleColor = typedArray.getColor(R.styleable.ViewPagerIndicator_indicator_selected_title_color, Color.BLACK);
-        mPerPageMaxTabCount = typedArray.getInt(R.styleable.ViewPagerIndicator_max_pager_count,4);
+        mPerPageMaxTabCount = typedArray.getInt(R.styleable.ViewPagerIndicator_max_pager_count, 4);
         typedArray.recycle();
 
         mPaint = new Paint();
@@ -58,11 +58,11 @@ public class ViewPagerIndicator extends LinearLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         mTop = getMeasuredHeight();
-        mHeight = mTop/6;
+        mHeight = mTop / 6;
         Resources resources = getResources();
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-        mWidth =(displayMetrics.widthPixels / mPerPageMaxTabCount);
-        setMeasuredDimension(mWidth * mChildCount, mTop+mHeight);
+        mWidth = (displayMetrics.widthPixels / mPerPageMaxTabCount);
+        setMeasuredDimension(mWidth * mChildCount, mTop + mHeight);
 
 
     }
@@ -78,40 +78,40 @@ public class ViewPagerIndicator extends LinearLayout {
         canvas.drawRect(mRect, mPaint);
     }
 
-    public void scroll(int position,float offset){
+    public void scroll(int position, float offset) {
 
         TextView textView;
 
-        mLeft = (int)((position+offset)*mWidth);
+        mLeft = (int) ((position + offset) * mWidth);
 
-        if (position>mPerPageMaxTabCount-2){
-            int off=(int)((position-mPerPageMaxTabCount+1+offset)*mWidth);
-            scrollTo(off,0);
+        if (position > mPerPageMaxTabCount - 2) {
+            int off = (int) ((position - mPerPageMaxTabCount + 1 + offset) * mWidth);
+            scrollTo(off, 0);
         }
-        if (position+1<mChildCount){
-            textView = (TextView)getChildAt(position+1);
+        if (position + 1 < mChildCount) {
+            textView = (TextView) getChildAt(position + 1);
             textView.setTextColor(Color.GRAY);
         }
-        if (position-1>=0){
-            textView = (TextView)getChildAt(position-1);
+        if (position - 1 >= 0) {
+            textView = (TextView) getChildAt(position - 1);
             textView.setTextColor(Color.GRAY);
         }
 
-        textView = (TextView)getChildAt(position);
+        textView = (TextView) getChildAt(position);
         textView.setTextColor(mSelectedTitleColor);
 
         invalidate();
     }
 
-    public void updateTab(final LinkedList<Marker>  titles, final ViewPager viewpager){
+    public void updateTab(final LinkedList<Marker> titles, final ViewPager viewpager) {
         removeAllViews();
-        mChildCount  = titles.size();
-        for (final Marker title: titles) {
+        mChildCount = titles.size();
+        for (final Marker title : titles) {
             TextView textView = new TextView(getContext());
             textView.setText(title.getTitle());
-            LayoutParams layoutParams = new LayoutParams(getMeasuredWidth()/mPerPageMaxTabCount,LayoutParams.WRAP_CONTENT);
-            layoutParams.gravity= Gravity.CENTER;
-            layoutParams.weight =1;
+            LayoutParams layoutParams = new LayoutParams(getMeasuredWidth() / mPerPageMaxTabCount, LayoutParams.WRAP_CONTENT);
+            layoutParams.gravity = Gravity.CENTER;
+            layoutParams.weight = 1;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 textView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
             }
