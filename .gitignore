@@ -3,6 +3,9 @@
 /local.properties
 .DS_Store
 /build
+/gradle
+/projectFilesBackup
+.idea
 /captures
 .navigation
 *.log
