@@ -16,15 +16,15 @@ public class HTTPConnect {
     private HttpURLConnection httpURLConnection;
     public static final int port = 7272;
 
-    public static HTTPConnect createConnect(String url){
+    public static HTTPConnect createConnect(String url) {
         HTTPConnect HTTPConnect = new HTTPConnect();
-        if(!HTTPConnect.initConnect(url)){
+        if (!HTTPConnect.initConnect(url)) {
             return null;
         }
         return HTTPConnect;
     }
 
-    private boolean initConnect(String url){
+    private boolean initConnect(String url) {
         try {
             httpURLConnection = (HttpURLConnection) new URL(url).openConnection();
             httpURLConnection.setRequestMethod("POST");
@@ -39,7 +39,7 @@ public class HTTPConnect {
         return true;
     }
 
-    public String sendMsg(String msg){
+    public String sendMsg(String msg) {
         BufferedWriter bufferedWriter = null;
         BufferedReader bufferedReader = null;
         StringBuilder stringBuilder = new StringBuilder();
@@ -61,15 +61,15 @@ public class HTTPConnect {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
-        }finally {
-            try{
-                if (bufferedReader!=null){
+        } finally {
+            try {
+                if (bufferedReader != null) {
                     bufferedReader.close();
                 }
-                if (bufferedWriter!=null){
+                if (bufferedWriter != null) {
                     bufferedWriter.close();
                 }
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             disconnect();

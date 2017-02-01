@@ -34,7 +34,7 @@ import org.json.JSONObject;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -50,7 +50,7 @@ public class SidebarFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_UID = "uid";
     private static final String ARG_NICKNAME = "nickname";
-    @Bind(R.id.login_btn)
+    @BindView(R.id.login_btn)
     Button mLoginBtn;
 
 
@@ -265,7 +265,6 @@ public class SidebarFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     final int LOGIN_REQUEST_CODE = 0x01;

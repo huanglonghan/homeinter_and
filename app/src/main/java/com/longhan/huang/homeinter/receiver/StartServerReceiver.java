@@ -14,11 +14,11 @@ public class StartServerReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if(!Tools.getServerState(context, LocationService.HomeInterServicePackName)){
+        if (!Tools.getServerState(context, LocationService.HomeInterServicePackName)) {
             LocationService.startConnectAndLocationServer(context);
         }
 
-        if(!Tools.getServerState(context, MonitorService.MonitorServicePackName)){
+        if (!Tools.getServerState(context, MonitorService.MonitorServicePackName)) {
             context.startService(new Intent(context, MonitorService.class));
         }
     }

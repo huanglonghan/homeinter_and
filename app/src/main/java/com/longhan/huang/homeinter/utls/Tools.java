@@ -24,9 +24,10 @@ public class Tools {
         return sharedPreferences.getBoolean(ISONCELAUNCH, true);
     }
 
-    public static boolean getServerState(Context Context, String serviceName) {
-        ActivityManager activityManager = (ActivityManager) Context.getSystemService(android.content.Context.ACTIVITY_SERVICE);
-        ArrayList<ActivityManager.RunningServiceInfo> serviceList = (ArrayList<ActivityManager.RunningServiceInfo>) activityManager.getRunningServices(100);
+    public static boolean getServerState(Context context, String serviceName) {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(android.content.Context.ACTIVITY_SERVICE);
+        ArrayList<ActivityManager.RunningServiceInfo> serviceList =
+                (ArrayList<ActivityManager.RunningServiceInfo>) activityManager.getRunningServices(100);
         int size = serviceList.size();
         for (int i = 0; i < size; i++) {
             String str = serviceList.get(i).service.getClassName();

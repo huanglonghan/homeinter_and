@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- *
  * Created by 龙汗 on 2016/3/20.
  */
 

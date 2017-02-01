@@ -5,11 +5,11 @@ package com.longhan.huang.homeinter.config;
  */
 public class Config {
 
-    public static final String locationServerIP = "huanglonghan.iask.in";
+    public static final String locationServerIP = "huanglonghan.pw";
 
     public static final int locationServerPort = 8282;
 
-    public static final String httpServiceUrl = "http://"+locationServerIP+":7272";
+    public static final String httpServiceUrl = "http://" + locationServerIP + ":7272";
 
     /**
      * 腾讯App_id

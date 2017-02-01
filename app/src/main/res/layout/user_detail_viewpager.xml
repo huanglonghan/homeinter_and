@@ -12,10 +12,10 @@
         android:id="@+id/tab_view"
         app:tabMode="scrollable"
         app:tabGravity="center"
-        android:background="@color/wallet_bright_foreground_holo_dark"
+        android:background="#fff"
         app:tabIndicatorColor="@color/colorPrimaryDark"
         app:tabSelectedTextColor="@color/colorPrimary"
-        app:tabTextColor="@color/wallet_bright_foreground_holo_light"/>
+        app:tabTextColor="#000"/>
     <!--<com.longhan.huang.homeinter.component.ViewPagerIndicator-->
         <!--android:id="@+id/viewpager_indicator"-->
         <!--android:layout_width="match_parent"-->

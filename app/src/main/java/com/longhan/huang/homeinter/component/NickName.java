@@ -1,21 +1,18 @@
 package com.longhan.huang.homeinter.component;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import butterknife.Bind;
-import butterknife.OnClick;
 import com.longhan.huang.homeinter.R;
 
 /**
  * TODO: document your custom view class.
  */
-public class NickName extends LinearLayout implements View.OnClickListener{
+public class NickName extends LinearLayout implements View.OnClickListener {
 
     EditText nickName;
     Button nickNameConfirm;

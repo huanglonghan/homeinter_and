@@ -10,15 +10,15 @@ public class HTTPInterface {
 
     private static final String setUserNickNameKV = "opt=setNickname&uid=%s&nickname=%s&time=%d";
 
-    public static String connectMsg(String deviceId){
-        return String.format(connectKV,deviceId,System.currentTimeMillis());
+    public static String connectMsg(String deviceId) {
+        return String.format(connectKV, deviceId, System.currentTimeMillis());
     }
 
-    public static String getUserNickNameMsg(String uid){
-        return String.format(getUserNickNameKV,uid,System.currentTimeMillis());
+    public static String getUserNickNameMsg(String uid) {
+        return String.format(getUserNickNameKV, uid, System.currentTimeMillis());
     }
 
-    public static String setUserNickNameMsg(String uid,String nickname){
-        return String.format(setUserNickNameKV,uid,nickname,System.currentTimeMillis());
+    public static String setUserNickNameMsg(String uid, String nickname) {
+        return String.format(setUserNickNameKV, uid, nickname, System.currentTimeMillis());
     }
 }

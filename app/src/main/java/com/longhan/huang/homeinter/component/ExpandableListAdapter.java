@@ -54,14 +54,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        TextView view =new TextView(mContext);
+        TextView view = new TextView(mContext);
         view.setText("group1");
         return view;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        TextView view =new TextView(mContext);
+        TextView view = new TextView(mContext);
         view.setText("child1");
         return view;
     }

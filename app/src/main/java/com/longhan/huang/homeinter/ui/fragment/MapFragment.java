@@ -53,7 +53,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -68,16 +68,16 @@ public class MapFragment extends BaseMapFragment implements AMap.OnMarkerClickLi
     Runnable mRefreshChangeTip;
     OnStopServiceListeners mStopServiceListeners;
     public ServiceConnection serviceConnection;
-    @Bind(R.id.showAll)
+    @BindView(R.id.showAll)
     ImageButton showAll;
     Handler handler;
 
-    @Bind(R.id.showStatus)
+    @BindView(R.id.showStatus)
     TextView showStatus;
 
-    @Bind(R.id.showSelf)
+    @BindView(R.id.showSelf)
     ImageButton showSelf;
-    @Bind(R.id.drawer_layout)
+    @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
 
@@ -402,7 +402,6 @@ public class MapFragment extends BaseMapFragment implements AMap.OnMarkerClickLi
         executorService.shutdown();
         getActivity().unbindService(serviceConnection);
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
 

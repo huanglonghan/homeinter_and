@@ -28,9 +28,9 @@ public class TCPConnect {
     private TCPConnect() {
     }
 
-    public static TCPConnect createConnect(Handler handler){
+    public static TCPConnect createConnect(Handler handler) {
         TCPConnect TCPCommunication = new TCPConnect();
-        if(!TCPCommunication.initSocket(handler)){
+        if (!TCPCommunication.initSocket(handler)) {
             return null;
         }
         TCPCommunication.receiveMsg();
@@ -55,7 +55,7 @@ public class TCPConnect {
                     byte[] buffer = new byte[1024];
                     StringBuilder strBuffer = new StringBuilder();
                     int dataLength = 1;
-                    int checkLen=0;
+                    int checkLen = 0;
                     while (receiveFlag) {
                         if (dataLength == -1) {
                             closeSocket();
@@ -73,7 +73,7 @@ public class TCPConnect {
                                 while ((dataLength = bufferedInputStream.read(buffer)) != -1) {
                                     if (dataLength == 1024) {
                                         checkLen = TCPInterface.checkProtocol(buffer, dataLength);
-                                        if (checkLen==0){
+                                        if (checkLen == 0) {
                                             strBuffer.append(new String(buffer));
                                             Message message = handler.obtainMessage(RECEIVE_DATA_MSG);
                                             Bundle bundle = new Bundle();
@@ -82,17 +82,17 @@ public class TCPConnect {
                                             message.sendToTarget();
                                             strBuffer.delete(0, strBuffer.length());
                                             break;
-                                        }else if(checkLen<0) {
+                                        } else if (checkLen < 0) {
                                             break;
                                         }
                                         strBuffer.append(new String(buffer));
                                     } else {
-                                        if (strBuffer.length()<1024){
-                                            if (TCPInterface.checkProtocol(buffer, dataLength)!=0){
+                                        if (strBuffer.length() < 1024) {
+                                            if (TCPInterface.checkProtocol(buffer, dataLength) != 0) {
                                                 break;
                                             }
-                                        }else if(strBuffer.length()==1024){
-                                            if (checkLen!=dataLength){
+                                        } else if (strBuffer.length() == 1024) {
+                                            if (checkLen != dataLength) {
                                                 break;
                                             }
                                         }
@@ -107,7 +107,7 @@ public class TCPConnect {
                                 }
 
                             } catch (IOException e) {
-                                   e.printStackTrace();
+                                e.printStackTrace();
                             }
                         }
                     }
@@ -169,7 +169,6 @@ public class TCPConnect {
         }
         return true;
     }
-
 
 
     @Override

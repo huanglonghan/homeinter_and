@@ -1,10 +1,6 @@
 package com.longhan.huang.homeinter.utls.connect;
 
-import android.util.Base64;
-
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 
 /**
  * Created by 龙汗 on 2016/2/3.
@@ -52,8 +48,8 @@ public class TCPInterface {
     /**
      * 产生连接json
      *
-     * @param tCode    String
-     * @param uid      String
+     * @param tCode String
+     * @param uid   String
      * @return connectJson String
      */
     public static String connectMsg(String tCode, String uid) {
@@ -78,15 +74,15 @@ public class TCPInterface {
 
     //检查协议
     public static int checkProtocol(byte[] buffer, int dataLength) {
-        int height =  ((((int) buffer[0]) << 8));
-        int low  = (((int) buffer[1]) & 0xff);
-        int len = height|low ;
-        return  len - (dataLength - 2);
+        int height = ((((int) buffer[0]) << 8));
+        int low = (((int) buffer[1]) & 0xff);
+        int len = height | low;
+        return len - (dataLength - 2);
     }
 
     //解析协议
     public static String parseProtocol(StringBuilder buffer) {
-        return buffer.substring(2,buffer.length());
+        return buffer.substring(2, buffer.length());
     }
 
     //构建协议

@@ -29,17 +29,17 @@ public class MonitorService extends Service {
         super.onCreate();
         mMonitorFlag = true;
         if (mMonitorService == null) {
-            mMonitorService = new Thread("MonitorService"){
+            mMonitorService = new Thread("MonitorService") {
                 @Override
                 public void run() {
-                    while (mMonitorFlag){
+                    while (mMonitorFlag) {
                         try {
-                            Thread.sleep(1000*10);
+                            Thread.sleep(1000 * 10);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                         Context context = getApplicationContext();
-                        if(!Tools.getServerState(context, LocationService.HomeInterServicePackName)){
+                        if (!Tools.getServerState(context, LocationService.HomeInterServicePackName)) {
                             context.startService(new Intent(context, LocationService.class));
                         }
                     }

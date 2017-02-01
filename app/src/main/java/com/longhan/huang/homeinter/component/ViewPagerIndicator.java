@@ -17,10 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amap.api.maps2d.model.Marker;
+import com.longhan.huang.homeinter.R;
 
 import java.util.LinkedList;
-
-import com.longhan.huang.homeinter.R;
 
 /**
  * Created by 龙汗 on 2016/3/18.
