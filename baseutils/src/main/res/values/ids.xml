@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="save_image_tv" type="id"/>
+    <item name="very_image_viewpager" type="id"/>
+    <item name="very_image_viewpager_text" type="id"/>
+</resources>

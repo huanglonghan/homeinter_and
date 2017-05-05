@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme"/>
+
+    <style name="ActivityAnimFade" parent="@android:style/Animation.Translucent">
+        <!--<item name="android:activityOpenEnterAnimation">@anim/slide_in</item>-->
+        <!--<item name="android:activityOpenExitAnimation">@anim/hold</item>-->
+        <item name="android:activityCloseEnterAnimation">@anim/hold</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Customize your theme here. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="TextView">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/common_color</item>
+    </style>
+
+    <style name="Button" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/common_color</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="Spinner" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textColor">@color/common_color</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="InterestPopupWindowAnimateStyle" parent="@android:style/Animation.Translucent">
+        <item name="android:windowEnterAnimation">@anim/left_slide_in</item>
+        <item name="android:windowExitAnimation">@anim/left_slide_out</item>
+    </style>
+
+    <style name="PullPopupWindowAnimateStyle" parent="@android:style/Animation.Translucent">
+        <item name="android:windowEnterAnimation">@anim/bottom_slide_in</item>
+        <item name="android:windowExitAnimation">@anim/bottom_slide_out</item>
+    </style>
+
+    <style name="BorderLess" parent="AppTheme">
+        <item name="android:foreground">?android:attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="NotBorderLess" parent="AppTheme">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="Elevation" parent="AppTheme">
+    </style>
+
+    <style name="Elevation4" parent="AppTheme">
+    </style>
+
+    <style name="Elevation10" parent="AppTheme">
+    </style>
+</resources>
