@@ -4,11 +4,11 @@ package com.longhan.huang.homeinter.utls.connect;
  * Created by 龙汗 on 2016/3/7.
  */
 public class HTTPInterface {
-    private static final String connectKV = "opt=init&deviceId=%s&time=%d";
+    private static final String connectKV = "opt=init&deviceId=%s&timestamp=%d";
 
-    private static final String getUserNickNameKV = "opt=getNickname&uid=%s&time=%d";
+    private static final String getUserNickNameKV = "opt=getNickname&uid=%s&timestamp=%d";
 
-    private static final String setUserNickNameKV = "opt=setNickname&uid=%s&nickname=%s&time=%d";
+    private static final String setUserNickNameKV = "opt=setNickname&uid=%s&nickname=%s&timestamp=%d";
 
     public static String connectMsg(String deviceId) {
         return String.format(connectKV, deviceId, System.currentTimeMillis());
