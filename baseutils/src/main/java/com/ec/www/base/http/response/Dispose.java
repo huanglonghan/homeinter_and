@@ -66,7 +66,7 @@ public abstract class Dispose implements IDispose {
 
     @Override
     public void onPerformAfter(Object o) {
-        if (mView.getStatus() == ICallbackView.STATE_RESUME) {
+        if (mView.getStatus() < ICallbackView.STATE_PAUSE) {
             mView.onHttpResult(mResultSupport);
         }
     }
@@ -77,7 +77,7 @@ public abstract class Dispose implements IDispose {
         if (BuildConfig.DEBUG) {
             mView.showTip(e.toString(), Toast.LENGTH_LONG);
         }
-        if (mView.getStatus() == ICallbackView.STATE_RESUME) {
+        if (mView.getStatus() < ICallbackView.STATE_PAUSE) {
             if (mResultSupport.data != null) {
                 mView.onHttpResult(mResultSupport);
             }
@@ -100,7 +100,7 @@ public abstract class Dispose implements IDispose {
         if (BuildConfig.DEBUG) {
             mView.showTip("http请求重复, http方法:" + tag, Toast.LENGTH_LONG);
         }
-        if (mView.getStatus() == ICallbackView.STATE_RESUME) {
+        if (mView.getStatus() < ICallbackView.STATE_PAUSE) {
             if (mResultSupport.data != null) {
                 mView.onHttpResult(mResultSupport);
             }

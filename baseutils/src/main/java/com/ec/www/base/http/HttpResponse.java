@@ -1,12 +1,9 @@
 package com.ec.www.base.http;
 
-import android.support.v4.util.Pools;
-
 import com.ec.www.BuildConfig;
 import com.ec.www.base.http.response.IDispose;
 import com.ec.www.base.http.response.ResultSupport;
 import com.ec.www.utils.CommonUtils;
-import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -29,7 +26,9 @@ public class HttpResponse extends DefaultObserver<Object> {
 
     public void recycle() {
         try {
-            mIDispose.recycle();
+            if (mIDispose != null) {
+                mIDispose.recycle();
+            }
         } catch (Exception ignore) {
             ignore.printStackTrace();
         }
@@ -68,6 +67,7 @@ public class HttpResponse extends DefaultObserver<Object> {
      */
     @Override
     public final void onNext(Object o) {
+        if (mIDispose == null) throw new RuntimeException("must first initialize mIDispose !");
         if (o == null) throw new RuntimeException("CommonResponse is null!");
         if (!mIDispose.onPrePerform(o)) {
             mIDispose.onPerform(o);
@@ -87,6 +87,7 @@ public class HttpResponse extends DefaultObserver<Object> {
      */
     @Override
     public final void onComplete() {
+        if (mIDispose == null) throw new RuntimeException("must first initialize mIDispose !");
         mIDispose.onPerCompleted();
         overCallback();
     }
@@ -96,6 +97,7 @@ public class HttpResponse extends DefaultObserver<Object> {
      */
     @Override
     public final void onError(Throwable e) {
+        if (mIDispose == null) throw new RuntimeException("must first initialize mIDispose !");
         mIDispose.onPerError(e);
         overCallback();
         CommonUtils.printStackTrace(e, BuildConfig.DEBUG);
@@ -122,6 +124,7 @@ public class HttpResponse extends DefaultObserver<Object> {
      * 请求重复
      */
     public final void onRepeat(String tag) {
+        if (mIDispose == null) throw new RuntimeException("must first initialize mIDispose !");
         mIDispose.onRepeat(tag);
         overCallback();
     }

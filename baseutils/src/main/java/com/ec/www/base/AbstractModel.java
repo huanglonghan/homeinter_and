@@ -53,12 +53,13 @@ public abstract class AbstractModel<T, U> {
      */
     @NotProguard
     protected <M> void onSubscribe(Observable<M> observable, HttpResponse response) {
-        int resultCode = response.getIDispose().getResultSupport().resultCode;
-        int requestId = mRepeatArray.get(resultCode, IDispose.DEFAULT);
-
         if (!NetworkUtils.isNetworkConnected()) {
             response.onError(new NetworkErrorException());
+            return;
         }
+
+        int resultCode = response.getIDispose().getResultSupport().resultCode;
+        int requestId = mRepeatArray.get(resultCode, IDispose.DEFAULT);
 
         if (requestId == IDispose.DEFAULT) {
             //新的请求

@@ -29,17 +29,11 @@ public class BaseWebView extends WebView {
 
     public BaseWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        if (isInEditMode()) {
-            return;
-        }
         init();
     }
 
     public BaseWebView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        if (isInEditMode()) {
-            return;
-        }
         init();
     }
 
@@ -79,7 +73,7 @@ public class BaseWebView extends WebView {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((str) -> {
                     if (str != null) {
-                        loadData(str, "text/html; charset=UTF-8", null);
+                        loadDataWithBaseURL("file:///android_asset/",str, "text/html; charset=UTF-8", null, null);
                     }
                 });
     }

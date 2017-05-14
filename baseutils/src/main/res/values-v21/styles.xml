@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme"/>
-
     <style name="ActivityAnimFade" parent="@android:style/Animation.Translucent">
         <!--<item name="android:activityOpenEnterAnimation">@anim/slide_in</item>-->
         <!--<item name="android:activityOpenExitAnimation">@anim/hold</item>-->
@@ -10,25 +8,25 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_out</item>
     </style>
 
-    <style name="BorderLess" parent="AppTheme">
+    <style name="BorderLess">
         <item name="android:foreground">?android:attr/selectableItemBackgroundBorderless</item>
         <item name="android:elevation">1dp</item>
     </style>
 
-    <style name="NotBorderLess" parent="AppTheme">
+    <style name="NotBorderLess">
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:elevation">1dp</item>
     </style>
 
-    <style name="Elevation" parent="AppTheme">
+    <style name="Elevation">
         <item name="android:elevation">1dp</item>
     </style>
 
-    <style name="Elevation4" parent="AppTheme">
+    <style name="Elevation4">
         <item name="android:elevation">4dp</item>
     </style>
 
-    <style name="Elevation10" parent="AppTheme">
+    <style name="Elevation10">
         <item name="android:elevation">10dp</item>
     </style>
 

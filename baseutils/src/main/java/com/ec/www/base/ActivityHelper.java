@@ -1,5 +1,6 @@
 package com.ec.www.base;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.IdRes;
@@ -182,7 +183,6 @@ public class ActivityHelper implements IStatus {
             ActivityCompat.finishAfterTransition(mActivity);
         } else {
             mActivity.finish();
-            mActivity.overridePendingTransition(R.anim.hold, R.animator.slide_right_out);
         }
     }
 
@@ -196,7 +196,7 @@ public class ActivityHelper implements IStatus {
                     Toast.LENGTH_SHORT).show();
             new Handler().postDelayed(() -> isExit = false, 2000);
         } else {
-            mActivity.finish();
+            mActivity.exit();
         }
     }
 

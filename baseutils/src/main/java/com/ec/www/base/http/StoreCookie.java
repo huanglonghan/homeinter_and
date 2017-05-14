@@ -8,6 +8,7 @@ import com.ec.www.BuildConfig;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
@@ -20,9 +21,9 @@ import okhttp3.HttpUrl;
 
 public class StoreCookie implements CookieJar {
 
-    private final Hashtable<String, ArrayList<Cookie>> cookieStore;
+    private final ConcurrentHashMap<String, ArrayList<Cookie>> cookieStore;
 
-    public StoreCookie(Hashtable<String, ArrayList<Cookie>> cookieStore) {
+    public StoreCookie(ConcurrentHashMap<String, ArrayList<Cookie>> cookieStore) {
         this.cookieStore = cookieStore;
     }
 

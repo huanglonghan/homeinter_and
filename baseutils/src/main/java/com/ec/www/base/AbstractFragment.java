@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.RequestManager;
 import com.ec.www.base.http.response.ResultSupport;
-import com.ec.www.view.LoadingFragment;
+import com.ec.www.widget.LoadingFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

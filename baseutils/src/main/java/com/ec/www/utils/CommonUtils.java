@@ -19,6 +19,7 @@ import android.os.Debug;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -30,6 +31,9 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.DrawableRequestBuilder;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ec.www.BuildConfig;
 import com.ec.www.R;
 import com.ec.www.base.AbstractApplication;
@@ -182,28 +186,33 @@ public class CommonUtils {
     }
 
     //设置TextView 的 drawable
-    public static void setTextViewDrawable(Context context,
-                                           TextView view,
+    public static void setTextViewDrawable(TextView view,
                                            @DrawableRes int redRes,
                                            @ColorRes int colorRes,
                                            PositionType position) {
-        setTextViewDrawable(context, view, redRes, colorRes, null, position);
+        setTextViewDrawable(view, redRes, colorRes, null, position);
     }
 
     //设置TextView 的 drawable
-    public static void setTextViewDrawable(Context context,
-                                           TextView view,
+    public static void setTextViewDrawable(TextView view,
                                            @DrawableRes int redRes,
                                            @Nullable Size size,
                                            PositionType position) {
+        setTextViewDrawable(view, getDrawable(view.getContext(), redRes), size, position);
+    }
+
+    //设置TextView 的 drawable
+    public static void setTextViewDrawable(TextView view,
+                                           Drawable drawable,
+                                           @Nullable Size size,
+                                           PositionType position) {
         Size sizeBounds = size;
-        Drawable drawable = getDrawable(context, redRes);
         if (drawable == null) {
             return;
         }
 
         Drawable drawableLeft = null, drawableTop = null, drawableBottom = null, drawableRight = null;
-        float density = context.getResources().getDisplayMetrics().density;
+        float density = view.getContext().getResources().getDisplayMetrics().density;
         if (sizeBounds == null) {
             sizeBounds = new Size(drawable.getMinimumWidth(), drawable.getMinimumHeight());
         } else {
@@ -229,22 +238,43 @@ public class CommonUtils {
     }
 
     //设置TextView 的 drawable
-    public static void setTextViewDrawable(Context context,
-                                           TextView view,
-                                           @DrawableRes int redRes,
+    public static void setTextViewDrawable(TextView view,
+                                           Drawable drawable,
+                                           PositionType position) {
+        Drawable drawableLeft = null, drawableTop = null, drawableBottom = null, drawableRight = null;
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        switch (position) {
+            case LEFT:
+                drawableLeft = drawable;
+                break;
+            case TOP:
+                drawableTop = drawable;
+                break;
+            case BOTTOM:
+                drawableBottom = drawable;
+                break;
+            case RIGHT:
+                drawableRight = drawable;
+                break;
+        }
+        view.setCompoundDrawables(drawableLeft, drawableTop, drawableRight, drawableBottom);
+    }
+
+    //设置TextView 的 drawable
+    public static void setTextViewDrawable(TextView view,
+                                           Drawable drawable,
                                            @ColorRes int colorRes,
                                            @Nullable Size size,
                                            PositionType position) {
         Size sizeBounds = size;
-        Drawable drawable = getDrawable(context, redRes);
-        int color = getColor(context, colorRes);
+        int color = getColor(view.getContext(), colorRes);
 
         if (drawable == null) {
             return;
         }
 
         Drawable drawableLeft = null, drawableTop = null, drawableBottom = null, drawableRight = null;
-        float density = context.getResources().getDisplayMetrics().density;
+        float density = view.getContext().getResources().getDisplayMetrics().density;
         if (sizeBounds == null) {
             sizeBounds = new Size(drawable.getMinimumWidth(), drawable.getMinimumHeight());
         } else {
@@ -268,6 +298,55 @@ public class CommonUtils {
 
         view.setCompoundDrawables(drawableLeft, drawableTop, drawableRight, drawableBottom);
         view.setTextColor(color);
+    }
+
+    //设置TextView 的 drawable
+    public static void setTextViewDrawable(TextView view,
+                                           @DrawableRes int redRes,
+                                           @ColorRes int colorRes,
+                                           @Nullable Size size,
+                                           PositionType position) {
+        Size sizeBounds = size;
+        Drawable drawable = getDrawable(view.getContext(), redRes);
+        int color = getColor(view.getContext(), colorRes);
+
+        if (drawable == null) {
+            return;
+        }
+
+        Drawable drawableLeft = null, drawableTop = null, drawableBottom = null, drawableRight = null;
+        float density = view.getContext().getResources().getDisplayMetrics().density;
+        if (sizeBounds == null) {
+            sizeBounds = new Size(drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        } else {
+            sizeBounds = new Size((int) (size.getWidth() * density), (int) (size.getHeight() * density));
+        }
+        drawable.setBounds(0, 0, sizeBounds.getWidth(), sizeBounds.getHeight());
+        switch (position) {
+            case LEFT:
+                drawableLeft = drawable;
+                break;
+            case TOP:
+                drawableTop = drawable;
+                break;
+            case BOTTOM:
+                drawableBottom = drawable;
+                break;
+            case RIGHT:
+                drawableRight = drawable;
+                break;
+        }
+
+        view.setCompoundDrawables(drawableLeft, drawableTop, drawableRight, drawableBottom);
+        view.setTextColor(color);
+    }
+
+    public static void setImageVector(ImageView view, @DrawableRes int resId) {
+        view.setImageDrawable(VectorDrawableCompat.create(view.getResources(), resId, view.getContext().getTheme()));
+    }
+
+    public static Drawable getVectorDrawable(Context context, @DrawableRes int resId) {
+        return VectorDrawableCompat.create(context.getResources(), resId, context.getTheme());
     }
 
     public static boolean isCanScroll(RecyclerView v, int scrollY) {
@@ -447,5 +526,20 @@ public class CommonUtils {
         if (isDebug || Debug.isDebuggerConnected()) {
             e.printStackTrace();
         }
+    }
+
+    public static void loadImage(ImageView view, String url,
+                                 Function<DrawableRequestBuilder<String>, DrawableRequestBuilder<String>> customCallback) {
+        if (customCallback != null) {
+            try {
+                customCallback.apply(Glide.with(view.getContext()).load(url).diskCacheStrategy(DiskCacheStrategy.ALL)).into(view);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void loadImage(ImageView view, String url) {
+        loadImage(view, url, null);
     }
 }

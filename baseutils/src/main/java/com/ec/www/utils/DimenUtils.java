@@ -2,7 +2,9 @@ package com.ec.www.utils;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.support.annotation.DrawableRes;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +23,7 @@ public class DimenUtils {
         return (int) (spValue * fontScale + 0.5f);
     }
 
-    public static int px2sp( float pxValue) {
+    public static int px2sp(float pxValue) {
         float fontScale = AbstractApplication.getContext().getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
     }
@@ -51,17 +53,14 @@ public class DimenUtils {
     }
 
     public static Size measureSize(View view) {
-        view.measure(0, 0);
+        view.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         int measureWidth = view.getMeasuredWidth();
         int measureHeight = view.getMeasuredHeight();
         return new Size(measureWidth, measureHeight);
     }
 
     public static Size calcSize(int targetWidth, int sourceWidth, int sourceHeight) {
-        float sum = sourceWidth + sourceHeight;
-        float heightScale = (sourceHeight / sum);
-        float widthScale = (sourceWidth / sum);
-        int calcHeight = (int) (((float) targetWidth / widthScale) * heightScale);
+        int calcHeight = sourceHeight * targetWidth / sourceWidth;
         return new Size(targetWidth, calcHeight);
     }
 
@@ -99,11 +98,11 @@ public class DimenUtils {
 
     //根据大小转换Drawable
     public static Drawable setDrawableOfResource(Context context, @DrawableRes int resId, int width, int height) {
-        ImageView imageView = new ImageView(context);
-        imageView.setImageResource(resId);
-        imageView.setScaleType(ImageView.ScaleType.CENTER);
-        imageView.setLayoutParams(new ViewGroup.LayoutParams(width, height));
-        return imageView.getDrawable();
+        Drawable drawable = VectorDrawableCompat.create(context.getResources(), resId, context.getTheme());
+        if (drawable != null) {
+            drawable.setBounds(0,0, width, height);
+        }
+        return drawable;
     }
 
 }

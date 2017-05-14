@@ -9,9 +9,7 @@ import android.os.Debug;
 import android.os.Environment;
 import android.util.Log;
 
-
 import com.ec.www.BuildConfig;
-import com.ec.www.utils.CommonUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,6 +40,11 @@ public class CrashHandler implements UncaughtExceptionHandler {
         mSaveExceptionCallback = saveExceptionCallback;
     }
 
+    public CrashHandler setDebug(boolean debug) {
+        isDebug = debug;
+        return this;
+    }
+
     private static class CRASH_HANDLER {
         static {
             crashHandler = new CrashHandler();
@@ -51,6 +54,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
     }
 
     private UncaughtExceptionHandler mDefaultHandler;
+    private boolean isDebug;
 
     private final Map<String, String> infos = new HashMap<>();
 
@@ -58,13 +62,12 @@ public class CrashHandler implements UncaughtExceptionHandler {
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
     }
 
-    public static CrashHandler getInstance() {
-        return CRASH_HANDLER.crashHandler;
+    public static CrashHandler getInstance(boolean isDebug) {
+        return CRASH_HANDLER.crashHandler.setDebug(isDebug);
     }
 
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
-        CommonUtils.printStackTrace(ex, BuildConfig.DEBUG);
         if (!handleException(ex) && mDefaultHandler != null) {
             mDefaultHandler.uncaughtException(thread, ex);
         } else {
@@ -80,10 +83,12 @@ public class CrashHandler implements UncaughtExceptionHandler {
     private boolean handleException(final Throwable ex) {
 
         // 如果是调试状态则不生成异常文件，让系统默认的异常处理器来处理
-        if (BuildConfig.DEBUG || Debug.isDebuggerConnected())
+        if (isDebug || Debug.isDebuggerConnected()) {
             return false;
-        if (ex == null)
+        }
+        if (ex == null) {
             return false;
+        }
         // 收集设备参数信息
         collectDeviceInfo();
 

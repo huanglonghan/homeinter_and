@@ -1,7 +1,5 @@
 package com.ec.www.base;
 
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.DialogFragment;
@@ -14,8 +12,7 @@ import com.anthony.ultimateswipetool.SwipeHelper;
 import com.anthony.ultimateswipetool.activity.SwipeBackLayout;
 import com.anthony.ultimateswipetool.activity.interfaces.SwipeBackActivityBase;
 import com.bumptech.glide.RequestManager;
-import com.ec.www.R;
-import com.ec.www.view.LoadingFragment;
+import com.ec.www.widget.LoadingFragment;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -250,22 +247,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements Swip
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return mActivityHelper.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public void startActivity(Intent intent) {
-        if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            //ActivityOptionsCompat ao = ActivityOptionsCompat
-//            ActivityOptionsCompat ao =
-//                    ActivityOptionsCompat.makeCustomAnimation(this, R.transition.slide_in, android.R.transition.slide_right);
-//            startActivity(intent, ao.toBundle());
-            super.startActivity(intent);
-            //super.startActivity(intent,
-//                        ActivityOptionsCompat.makeSceneTransitionAnimation(this, (Pair<View, String>[]) null).toBundle());
-        } else {
-            super.startActivity(intent);
-            overridePendingTransition(R.animator.slide_right_in, R.anim.hold);
-        }
     }
 
     public Fragment getCurrentFragment() {

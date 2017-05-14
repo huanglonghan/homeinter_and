@@ -7,6 +7,7 @@ import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.concurrent.ConcurrentHashMap;
 
 import okhttp3.Cookie;
 
@@ -15,7 +16,7 @@ import okhttp3.Cookie;
  * 可持久化 map
  */
 
-public abstract class StoreMap<S extends ArrayList<? extends Cookie>> extends Hashtable<String, S> {
+public abstract class StoreMap<S extends ArrayList<? extends Cookie>> extends ConcurrentHashMap<String, S> {
 
     StoreMap() {
         super();

@@ -8,8 +8,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.ec.www.base.OnItemClickListener;
-import com.ec.www.view.swiperecycler.SwipeRecyclerView;
-import com.ec.www.view.swiperecycler.base.BaseAdapter;
+import com.ec.www.widget.swiperecycler.SwipeRecyclerView;
+import com.ec.www.widget.swiperecycler.BaseAdapter;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;

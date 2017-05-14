@@ -6,8 +6,8 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.ec.www.view.swiperecycler.SwipeRecyclerView;
-import com.ec.www.view.swiperecycler.base.BaseAdapter;
+import com.ec.www.widget.swiperecycler.SwipeRecyclerView;
+import com.ec.www.widget.swiperecycler.BaseAdapter;
 
 import io.reactivex.Observable;
 

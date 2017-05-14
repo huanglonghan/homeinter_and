@@ -2,13 +2,11 @@ package com.ec.www.base.web;
 
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -29,10 +27,12 @@ public class BaseViewClient extends WebViewClient {
     private BiConsumer<WebView, String> mPageFinished;
     private ArrayList<String> mUrls = new ArrayList<>();
     private static final String interfaceName = "DefaultInterface";
+    private Context mContext;
 
     @SuppressLint({"JavascriptInterface", "AddJavascriptInterface"})
     public BaseViewClient(WebView view) {
         view.addJavascriptInterface(this, interfaceName);
+        mContext = view.getContext();
     }
 
     public BaseViewClient setPageFinished(BiConsumer<WebView, String> pageFinished) {
@@ -40,12 +40,11 @@ public class BaseViewClient extends WebViewClient {
         return this;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-        //requestHandle(request.getUrl().toString());
-        return true;
-    }
+//    @Override
+//    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+//        //requestHandle(request.getUrl().toString());
+//        return true;
+//    }
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -126,7 +125,7 @@ public class BaseViewClient extends WebViewClient {
     @JavascriptInterface
     public void imageClickListener(String url) {
         if (mUrls.size() > 0)
-            imageClick(mUrls, mUrls.indexOf(url));
+            imageClick(mContext, mUrls, mUrls.indexOf(url));
     }
 
     @NotProguard
@@ -156,14 +155,14 @@ public class BaseViewClient extends WebViewClient {
             } catch (ActivityNotFoundException ignored) {
             }
         } else {
-            textLinkClick(url);
+            textLinkClick(mContext, url);
         }
     }
 
-    public void textLinkClick(String url) {
+    public void textLinkClick(Context context, String url) {
     }
 
-    public void imageClick(ArrayList<String> urls, int index) {
+    public void imageClick(Context context, ArrayList<String> urls, int index) {
     }
 
 }

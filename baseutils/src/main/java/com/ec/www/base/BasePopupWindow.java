@@ -3,13 +3,13 @@ package com.ec.www.base;
 import android.app.Service;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.AnimRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -240,8 +240,12 @@ public class BasePopupWindow<M> extends PopupWindow implements ICallbackView {
         return this;
     }
 
-    protected void closeAnimator(View view, Runnable mEndRunnable) {
-        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.bottom_slide_out);
+    protected void defaultCloseAnimator(View view, Runnable mEndRunnable) {
+        closeAnimator(view, R.anim.bottom_slide_out, mEndRunnable);
+    }
+
+    protected void closeAnimator(View view, @AnimRes int resId, Runnable mEndRunnable) {
+        Animation animation = AnimationUtils.loadAnimation(getContext(), resId);
         //view.setAnimation(animation);
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -262,8 +266,12 @@ public class BasePopupWindow<M> extends PopupWindow implements ICallbackView {
         view.startAnimation(animation);
     }
 
-    protected void openAnimator(View view) {
-        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.bottom_slide_in);
+    protected void defaultOpenAnimator(View view) {
+        openAnimator(view, R.anim.bottom_slide_in);
+    }
+
+    protected void openAnimator(View view, @AnimRes int resId) {
+        Animation animation = AnimationUtils.loadAnimation(getContext(), resId);
         //view.setAnimation(animation);
         view.startAnimation(animation);
     }
@@ -285,7 +293,7 @@ public class BasePopupWindow<M> extends PopupWindow implements ICallbackView {
         if (!isDismissComplete) {
             View view = ((ViewGroup) getContentView()).getChildAt(0);
             if (view != null) {
-                closeAnimator(view, mEndRunnable);
+                defaultCloseAnimator(view, mEndRunnable);
             }
 
             InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Service.INPUT_METHOD_SERVICE);
@@ -302,10 +310,9 @@ public class BasePopupWindow<M> extends PopupWindow implements ICallbackView {
         if (view != null) {
             view.post(() -> {
                 getContentView().setVisibility(View.VISIBLE);
-                openAnimator(view);
+                defaultOpenAnimator(view);
             });
         }
-
 //        if (mFragment != null) {
 //            Window window = mFragment.getActivity().getWindow();
 //            isFullScreen = CommonUtils.hasFlag(window, WindowManager.LayoutParams.FLAG_FULLSCREEN);
