@@ -80,9 +80,26 @@ public abstract class ItemViewBinder<T, VH extends ViewHolder> implements Compar
      *                 update.
      * @since v2.5.0
      */
-    protected void onBindViewHolder(
+    protected final void onBindViewHolder(
             @NonNull VH holder, @NonNull T item, @NonNull List<Object> payloads) {
-        onBindViewHolder(holder, item);
+        if (payloads.size() <= 0 || !onPreBindViewHolder(holder, item, payloads)) {
+            onBindViewHolder(holder, item);
+        }
+    }
+
+    /**
+     * 高级更新拦截方法
+     * 拦截进行部分数据更新
+     * 不拦截将调用 onBindViewHolder 进行完全更新
+     * 返回true拦截, 反之不拦截 默认不拦截
+     *
+     * @param holder   holder
+     * @param item     item
+     * @param payloads payloads
+     * @return 返回true拦截, 反之不拦截
+     */
+    protected boolean onPreBindViewHolder(@NonNull VH holder, @NonNull T item, @NonNull List<Object> payloads) {
+        return false;
     }
 
 
@@ -121,16 +138,47 @@ public abstract class ItemViewBinder<T, VH extends ViewHolder> implements Compar
         return adapter;
     }
 
+    /**
+     * 更新数据时调用的比较函数
+     * 进行比较是不是同类型数据
+     * 返回false 数据类型不相同
+     * 返回true 调用(@code areContentsTheSame()) 比较内容
+     *
+     * @param oldItem 新数据
+     * @param newItem 老数据
+     * @return 比较结果
+     */
     @Override
     public boolean areItemsTheSame(Object oldItem, T newItem) {
         return false;
     }
 
+    /**
+     * 更新数据时调用的比较函数
+     * 进行比较同类型数据值是否相同
+     * 相同true 不相同false(返回值)
+     * 仅在{@code areItemsTheSame()} 返回true时调用
+     * 返回false 调用(@code getChangePayload()) 进行高级局部更新
+     * 返回true 数据相同数据未变动
+     *
+     * @param oldItem 新数据
+     * @param newItem 老数据
+     * @return 比较结果
+     */
     @Override
     public boolean areContentsTheSame(Object oldItem, T newItem) {
         return false;
     }
 
+    /**
+     * 更新数据时调用的高级局部更新函数
+     * 进行同类型不同值的差异计算
+     * 差异数据包装成object对象返回
+     *
+     * @param oldItem 新数据
+     * @param newItem 老数据
+     * @return 差异数据
+     */
     @Override
     public Object getChangePayload(Object oldItem, T newItem) {
         return null;

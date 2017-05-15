@@ -2,24 +2,54 @@ package pw.bmyo.www.swiperecycler;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.util.DiffUtil;
-import android.support.v7.util.ListUpdateCallback;
 
-import java.util.LinkedList;
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import me.drakeet.multitype.Linker;
-import me.drakeet.multitype.MultiTypeAdapter;
-import me.drakeet.multitype.TypePool;
-import pw.bmyo.www.swiperecycler.multitype.CompareItem;
+import pw.bmyo.www.swiperecycler.multitype.MultiTypeAdapter;
+import pw.bmyo.www.swiperecycler.multitype.TypePool;
 
 /**
  * Created by huang on 2016/12/14.
  */
 
 public abstract class BaseAdapter extends MultiTypeAdapter {
+
+    /**
+     * 数据操作帮助类
+     */
+    private DataOperateHelper operateHelper;
+
+    public BaseAdapter() {
+        init();
+    }
+
+    public BaseAdapter(@Nullable List<?> items) {
+        super(items);
+        init();
+    }
+
+    public BaseAdapter(@Nullable List<?> items, int initialCapacity) {
+        super(items, initialCapacity);
+        init();
+    }
+
+    public BaseAdapter(@Nullable List<?> items, @NonNull TypePool pool) {
+        super(items, pool);
+        init();
+    }
+
+    /**
+     * 初始化操作
+     */
+    private void init() {
+        if (operateHelper == null) {
+            operateHelper = new DataOperateHelper(this);
+        }
+    }
+
+    public DataOperateHelper getOperateHelper() {
+        return operateHelper;
+    }
+
 
 }

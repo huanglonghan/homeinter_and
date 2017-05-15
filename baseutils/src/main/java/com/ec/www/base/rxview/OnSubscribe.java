@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.ec.www.base.OnItemClickListener;
+import pw.bmyo.www.swiperecycler.OnItemClickListener;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;

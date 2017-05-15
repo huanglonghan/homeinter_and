@@ -529,6 +529,11 @@ public class DataOperateHelper {
         list.addAll(index, data);
     }
 
+    /**
+     * 删除类型数据
+     *
+     * @param clazz 类型
+     */
     public final void delete(Class<?> clazz) {
         List<?> items = adapter.getItems();
         if (items == null) {
@@ -562,76 +567,64 @@ public class DataOperateHelper {
     public void setCompareItem(CompareItem<Object, ?> compare) {
         mCompare = compare;
     }
-//
-//    @Override
-//    public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-//        if (mLayoutInflater == null) {
-//            mLayoutInflater = LayoutInflater.from(parent.getContext());
-//        }
-//        return onCreateHolder(mLayoutInflater, parent, viewType);
-//    }
-//
-//    public abstract VH onCreateHolder(LayoutInflater inflater, ViewGroup parent, int viewType);
-//
-//    @Override
-//    public void onBindViewHolder(VH holder, int position) {
-//        onBindHolder(holder, mContent.get(position).setPosition(position));
-//    }
-//
-//    public abstract void onBindHolder(VH holder, Data<T> data);
-//
-//    @Override
-//    public void onBindViewHolder(VH holder, int position, List<Object> payloads) {
-//        if (payloads.size() <= 0 || !onBindHolder(holder, mContent.get(position).setPosition(position), payloads)) {
-//            super.onBindViewHolder(holder, position, payloads);
-//        }
-//    }
-//
-//    public boolean onBindHolder(VH holder, Data<T> data, List<Object> payloads) {
-//        return false;
-//    }
-//
 
+    /**
+     * 比较器回调类
+     *
+     * @param <T>
+     * @param <E>
+     */
     private static class CallBack<T, E> extends DiffUtil.Callback {
 
-        private List<T> mOldList;
-        private List<E> mNewList;
-        private CompareItem<T, E> mCompareItem;
+        /**
+         * 老数据集
+         */
+        private List<T> oldList;
+
+        /**
+         * 新数据集
+         */
+        private List<E> newList;
+
+        /**
+         * 比较器接口
+         */
+        private CompareItem<T, E> compareItem;
 
         CallBack(List<T> oldList, List<E> newList, CompareItem<T, E> compare) {
-            mOldList = oldList;
-            mNewList = newList;
-            mCompareItem = compare;
+            this.oldList = oldList;
+            this.newList = newList;
+            compareItem = compare;
         }
 
         @Override
         public int getOldListSize() {
-            return mOldList != null ? mOldList.size() : 0;
+            return oldList != null ? oldList.size() : 0;
         }
 
         @Override
         public int getNewListSize() {
-            return mNewList != null ? mNewList.size() : 0;
+            return newList != null ? newList.size() : 0;
         }
 
         @Override
         public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-            T oldItem = mOldList.get(oldItemPosition);
-            E newItem = mNewList.get(newItemPosition);
-            return newItem.getClass().isInstance(oldItem) && mCompareItem.areItemsTheSame(oldItem, newItem);
+            T oldItem = oldList.get(oldItemPosition);
+            E newItem = newList.get(newItemPosition);
+            return newItem.getClass().isInstance(oldItem) && compareItem.areItemsTheSame(oldItem, newItem);
         }
 
         @Override
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-            T oldItem = mOldList.get(oldItemPosition);
-            E newItem = mNewList.get(newItemPosition);
-            return newItem.getClass().isInstance(oldItem) && mCompareItem.areContentsTheSame(oldItem, newItem);
+            T oldItem = oldList.get(oldItemPosition);
+            E newItem = newList.get(newItemPosition);
+            return newItem.getClass().isInstance(oldItem) && compareItem.areContentsTheSame(oldItem, newItem);
         }
 
         @Nullable
         @Override
         public Object getChangePayload(int oldItemPosition, int newItemPosition) {
-            return mCompareItem.getChangePayload(mOldList.get(oldItemPosition), mNewList.get(newItemPosition));
+            return compareItem.getChangePayload(oldList.get(oldItemPosition), newList.get(newItemPosition));
         }
     }
 

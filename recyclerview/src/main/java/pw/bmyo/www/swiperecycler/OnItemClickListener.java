@@ -1,4 +1,4 @@
-package com.ec.www.base;
+package pw.bmyo.www.swiperecycler;
 
 import android.view.View;
 
