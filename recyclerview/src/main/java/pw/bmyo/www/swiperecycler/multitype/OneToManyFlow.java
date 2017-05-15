@@ -14,17 +14,24 @@
  * limitations under the License.
  */
 
-package me.drakeet.multitype;
+package pw.bmyo.www.swiperecycler.multitype;
 
+import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
 /**
+ * Process and flow operators for one-to-many.
+ *
  * @author drakeet
  */
-final class DefaultLinker<T> implements Linker<T> {
+public interface OneToManyFlow<T> {
 
-    @Override
-    public int index(@NonNull T t) {
-        return 0;
-    }
+    /**
+     * Sets some item view binders to the item type.
+     *
+     * @param binders the item view binders
+     * @return end flow operator
+     */
+    @NonNull @CheckResult @SuppressWarnings("unchecked")
+    OneToManyEndpoint<T> to(@NonNull ItemViewBinder<T, ?>... binders);
 }

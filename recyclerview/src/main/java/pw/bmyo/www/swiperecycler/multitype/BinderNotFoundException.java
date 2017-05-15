@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package me.drakeet.multitype;
+package pw.bmyo.www.swiperecycler.multitype;
 
 import android.support.annotation.NonNull;
 
 /**
  * @author drakeet
  */
-final class DefaultLinker<T> implements Linker<T> {
+public class BinderNotFoundException extends RuntimeException {
 
-    @Override
-    public int index(@NonNull T t) {
-        return 0;
+    public BinderNotFoundException(@NonNull Class<?> clazz) {
+        super("Do you have registered the binder for {className}.class in the adapter/pool?"
+            .replace("{className}", clazz.getSimpleName()));
     }
 }

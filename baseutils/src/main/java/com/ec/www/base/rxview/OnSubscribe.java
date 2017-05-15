@@ -8,12 +8,11 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.ec.www.base.OnItemClickListener;
-import com.ec.www.widget.swiperecycler.SwipeRecyclerView;
-import com.ec.www.widget.swiperecycler.BaseAdapter;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.MainThreadDisposable;
+import pw.bmyo.www.swiperecycler.BaseAdapter;
 
 import static com.jakewharton.rxbinding2.internal.Preconditions.checkMainThread;
 

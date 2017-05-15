@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.drakeet.multitype;
+package pw.bmyo.www.swiperecycler.multitype;
 
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
@@ -24,6 +24,7 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import java.util.List;
 
 /**
@@ -282,7 +283,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     /** A safe register method base on the TypePool's safety for TypePool. */
     @SuppressWarnings("unchecked")
     private void registerWithoutChecking(
-        @NonNull Class clazz, @NonNull ItemViewBinder itemViewBinder, @NonNull Linker linker) {
+            @NonNull Class clazz, @NonNull ItemViewBinder itemViewBinder, @NonNull Linker linker) {
         checkAndRemoveAllTypesIfNeed(clazz);
         typePool.register(clazz, itemViewBinder, linker);
     }

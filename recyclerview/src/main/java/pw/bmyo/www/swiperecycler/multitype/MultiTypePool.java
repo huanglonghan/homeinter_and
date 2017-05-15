@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package me.drakeet.multitype;
+package pw.bmyo.www.swiperecycler.multitype;
 
 import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,6 @@ public class MultiTypePool implements TypePool {
     @NonNull private final List<Class<?>> classes;
     @NonNull private final List<ItemViewBinder<?, ?>> binders;
     @NonNull private final List<Linker<?>> linkers;
-    @NonNull private final List<Linker<?>> linkers;
 
 
     /**
@@ -42,7 +42,6 @@ public class MultiTypePool implements TypePool {
         this.linkers = new ArrayList<>();
     }
 
-
     /**
      * Constructs a MultiTypePool with default lists and a specified initial capacity.
      *
@@ -53,7 +52,6 @@ public class MultiTypePool implements TypePool {
         this.binders = new ArrayList<>(initialCapacity);
         this.linkers = new ArrayList<>(initialCapacity);
     }
-
 
     /**
      * Constructs a MultiTypePool with specified lists.
@@ -82,7 +80,6 @@ public class MultiTypePool implements TypePool {
         linkers.add(linker);
     }
 
-
     @Override
     public int firstIndexOf(@NonNull final Class<?> clazz) {
         int index = classes.indexOf(clazz);
@@ -103,15 +100,14 @@ public class MultiTypePool implements TypePool {
         return classes;
     }
 
-
     @NonNull @Override
     public List<ItemViewBinder<?, ?>> getItemViewBinders() {
         return binders;
     }
 
-
     @NonNull
     public List<Linker<?>> getLinkers() {
         return linkers;
     }
+
 }

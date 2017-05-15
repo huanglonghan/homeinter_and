@@ -10,3 +10,6 @@
 .navigation
 *.log
 projectFilesBackup1/
+HomeInter/
+app/src/main/java/com/longhan/huang/homeinter/module/UserInfo.java
+app/src/main/res/drawable/ic_android_black_24dp.xml

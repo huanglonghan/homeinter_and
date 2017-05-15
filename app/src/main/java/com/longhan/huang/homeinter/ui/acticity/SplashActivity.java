@@ -10,14 +10,12 @@ import com.longhan.huang.homeinter.R;
 import com.longhan.huang.homeinter.service.LocationService;
 import com.longhan.huang.homeinter.service.MonitorService;
 import com.longhan.huang.homeinter.utls.Tools;
-import rx.Observable;
-import rx.Subscription;
 
 public class SplashActivity extends Activity {
 
     //@Bind(R.id.splash_view)
-    // ImageView splashView;
-    Subscription subscription;
+//    // ImageView splashView;
+//    Subscription subscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,19 +39,19 @@ public class SplashActivity extends Activity {
             startService(new Intent(this, MonitorService.class));
         }
 
-        subscription = Observable.timer(1, TimeUnit.SECONDS).subscribe(i -> {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        });
+//        subscription = Observable.timer(1, TimeUnit.SECONDS).subscribe(i -> {
+//            startActivity(new Intent(this, MainActivity.class));
+//            finish();
+//        });
 
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (subscription.isUnsubscribed()){
-            subscription.unsubscribe();
-        }
+//        if (subscription.isUnsubscribed()){
+//            subscription.unsubscribe();
+//        }
         // ButterKnife.unbind(this);
      }
 }

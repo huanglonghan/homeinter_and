@@ -1,2 +1,1 @@
-include ':app', ':baseutils', ':multitype', ':recyclerview'
-project(':multitype').projectDir = new File('multitype')
+include ':app', ':baseutils', ':recyclerview'

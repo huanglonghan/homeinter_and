@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.drakeet.multitype;
+package pw.bmyo.www.swiperecycler.multitype;
 
 import android.support.annotation.NonNull;
 
