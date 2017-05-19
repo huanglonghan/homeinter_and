@@ -4,6 +4,7 @@ import android.widget.Toast;
 
 import com.ec.www.BuildConfig;
 import com.ec.www.base.ICallbackView;
+import com.ec.www.base.IStatus;
 
 /**
  * Created by huang on 2017/2/26.
@@ -66,7 +67,7 @@ public abstract class Dispose implements IDispose {
 
     @Override
     public void onPerformAfter(Object o) {
-        if (mView.getStatus() < ICallbackView.STATE_PAUSE) {
+        if (mView.getStatus() <= IStatus.STATE_STOP) {
             mView.onHttpResult(mResultSupport);
         }
     }
@@ -77,7 +78,7 @@ public abstract class Dispose implements IDispose {
         if (BuildConfig.DEBUG) {
             mView.showTip(e.toString(), Toast.LENGTH_LONG);
         }
-        if (mView.getStatus() < ICallbackView.STATE_PAUSE) {
+        if (mView.getStatus() <= IStatus.STATE_STOP) {
             if (mResultSupport.data != null) {
                 mView.onHttpResult(mResultSupport);
             }
@@ -100,7 +101,7 @@ public abstract class Dispose implements IDispose {
         if (BuildConfig.DEBUG) {
             mView.showTip("http请求重复, http方法:" + tag, Toast.LENGTH_LONG);
         }
-        if (mView.getStatus() < ICallbackView.STATE_PAUSE) {
+        if (mView.getStatus() <= IStatus.STATE_STOP) {
             if (mResultSupport.data != null) {
                 mView.onHttpResult(mResultSupport);
             }
@@ -118,4 +119,5 @@ public abstract class Dispose implements IDispose {
     public void setView(ICallbackView view) {
         mView = view;
     }
+
 }

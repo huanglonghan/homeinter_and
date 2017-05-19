@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.RequestManager;
 import com.ec.www.base.http.response.ResultSupport;
-import com.ec.www.widget.LoadingFragment;
+import com.ec.www.view.LoadingFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -36,18 +36,26 @@ public abstract class AbstractFragment<M> extends Fragment implements ICallbackV
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public final View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (mView == null) {
+            mView = onBuildVIew(inflater, container, savedInstanceState);
+            if (mView ==null) {
+                throw new RuntimeException("must be inflater view");
+            }
+            onInitViewsAndEvents(mView);
+            initPrepare(savedInstanceState);
+        }
+        return mView;
+    }
+
+    public View onBuildVIew(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         int resId = getContentLayoutId();
         switch (resId) {
             case 0:
                 return null;
             default:
-                if (mView == null) {
-                    mView = inflater.inflate(resId, container, false);
-                    mHelper.bindButterKnife(mView);
-                    onInitViewsAndEvents(mView);
-                    initPrepare(savedInstanceState);
-                }
+                mView = inflater.inflate(resId, container, false);
+                mHelper.bindButterKnife(mView);
                 return mView;
         }
     }

@@ -19,12 +19,14 @@ import android.os.Debug;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -349,6 +351,10 @@ public class CommonUtils {
         return VectorDrawableCompat.create(context.getResources(), resId, context.getTheme());
     }
 
+    public static Drawable getVectorDrawable(@DrawableRes int resId) {
+        return VectorDrawableCompat.create(AbstractApplication.getContext().getResources(), resId, AbstractApplication.getContext().getTheme());
+    }
+
     public static boolean isCanScroll(RecyclerView v, int scrollY) {
         return scrollY + v.getMeasuredHeight()
                 >= ((v.getChildAt(0).getMeasuredHeight() * 0.9));
@@ -442,6 +448,14 @@ public class CommonUtils {
         return color;
     }
 
+    public static String getString(@StringRes int resId) {
+        return AbstractApplication.getContext().getResources().getString(resId);
+    }
+
+    public static String getString(Context context, @StringRes int resId) {
+        return context.getResources().getString(resId);
+    }
+
     //资源id获取drawable
     public static Drawable getDrawable(Context context, @DrawableRes int resId) {
         Drawable drawable;
@@ -460,6 +474,14 @@ public class CommonUtils {
         if (params != null)
             params.height += marginHeight;
         group.setPadding(group.getPaddingLeft(), marginHeight, group.getPaddingRight(), group.getPaddingBottom());
+    }
+
+    public static void fitSystem(View view) {
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        int marginHeight = getStatusBarHeight();
+        if (params != null)
+            params.height += marginHeight;
+        view.setPadding(view.getPaddingLeft(), marginHeight, view.getPaddingRight(), view.getPaddingBottom());
     }
 
     public static boolean hasFlag(Window window, int flags) {
@@ -530,16 +552,23 @@ public class CommonUtils {
 
     public static void loadImage(ImageView view, String url,
                                  Function<DrawableRequestBuilder<String>, DrawableRequestBuilder<String>> customCallback) {
+        DrawableRequestBuilder<String> builder = Glide.with(view.getContext()).load(url).diskCacheStrategy(DiskCacheStrategy.ALL);
         if (customCallback != null) {
             try {
-                customCallback.apply(Glide.with(view.getContext()).load(url).diskCacheStrategy(DiskCacheStrategy.ALL)).into(view);
+                builder = customCallback.apply(builder);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        builder.into(view);
     }
 
     public static void loadImage(ImageView view, String url) {
         loadImage(view, url, null);
+    }
+
+    public static int getAdapterPosition(RecyclerView view, View tagView) {
+        View holder = view.findContainingItemView(tagView);
+        return view.getChildAdapterPosition(holder);
     }
 }

@@ -44,8 +44,8 @@ public class BaseWebView extends WebView {
         settings.setAppCacheEnabled(true);// 设置启动缓存
         settings.setSupportZoom(false);// 不支持缩放
         settings.setBuiltInZoomControls(false);
-        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        settings.setBlockNetworkImage(true);
+        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        //settings.setBlockNetworkImage(true);
         settings.setJavaScriptEnabled(true);
         setFocusable(false);
 

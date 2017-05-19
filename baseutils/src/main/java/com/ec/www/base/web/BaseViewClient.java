@@ -49,7 +49,7 @@ public class BaseViewClient extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         //requestHandle(url);
-        return true;
+        return false;
     }
 
     @Override
@@ -62,14 +62,14 @@ public class BaseViewClient extends WebViewClient {
                 e.printStackTrace();
             }
         }
-        view.getSettings().setBlockNetworkImage(false);
+        //view.getSettings().setBlockNetworkImage(false);
         addDefaultListener(view);
     }
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
-        view.getSettings().setBlockNetworkImage(true);
+        //view.getSettings().setBlockNetworkImage(true);
     }
 
     /**

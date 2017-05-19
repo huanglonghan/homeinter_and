@@ -1,6 +1,5 @@
 package com.ec.www.base;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.IdRes;
@@ -52,6 +51,7 @@ public class ActivityHelper implements IStatus {
         Dart.inject(mActivity);
         mFragmentManager = mActivity.getSupportFragmentManager();
         mGlide = Glide.with(mActivity);
+        ActivityManager.getInstance().add(mActivity);
     }
 
     public void onPostCreate() {
@@ -82,6 +82,7 @@ public class ActivityHelper implements IStatus {
     }
 
     public void onDestroy() {
+        ActivityManager.getInstance().remove(mActivity);
         if (mUnbinder != null) {
             mUnbinder.unbind();
             mUnbinder = null;
@@ -94,6 +95,7 @@ public class ActivityHelper implements IStatus {
             EventBus.getDefault().unregister(mActivity);
         }
         curStatus = STATE_DESTROY;
+        mActivity = null;
     }
 
     public void onLowMemory() {
@@ -179,6 +181,7 @@ public class ActivityHelper implements IStatus {
      * 退出
      */
     public final void exit() {
+        ActivityManager.getInstance().remove(mActivity);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ActivityCompat.finishAfterTransition(mActivity);
         } else {

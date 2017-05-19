@@ -1,5 +1,7 @@
 package com.ec.www.base;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.DialogFragment;
@@ -12,7 +14,8 @@ import com.anthony.ultimateswipetool.SwipeHelper;
 import com.anthony.ultimateswipetool.activity.SwipeBackLayout;
 import com.anthony.ultimateswipetool.activity.interfaces.SwipeBackActivityBase;
 import com.bumptech.glide.RequestManager;
-import com.ec.www.widget.LoadingFragment;
+import com.ec.www.R;
+import com.ec.www.view.LoadingFragment;
 
 import org.greenrobot.eventbus.Subscribe;
 

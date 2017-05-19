@@ -165,10 +165,20 @@ public class BasePopupWindow<M> extends PopupWindow implements ICallbackView {
                     WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
     }
 
-    public void onDestroy() {
+    public void onStart() {
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    public void onStop() {
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
+    }
+
+    public void onDestory() {
+        mFragment = null;
     }
 
     public BasePopupWindow(View view, RequestManager glide) {
@@ -183,9 +193,6 @@ public class BasePopupWindow<M> extends PopupWindow implements ICallbackView {
     }
 
     private void init(View view) {
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
-        }
         ButterKnife.bind(this, view);
         setFocusable(true);
         setOutsideTouchable(true);

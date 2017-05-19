@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.ec.www.utils.StatusBarHelper;
-import com.ec.www.widget.LoadingFragment;
+import com.ec.www.view.LoadingFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

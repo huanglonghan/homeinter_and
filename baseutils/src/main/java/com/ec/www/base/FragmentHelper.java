@@ -55,6 +55,7 @@ public class FragmentHelper implements IStatus {
             EventBus.getDefault().unregister(mFragment);
         }
         curStatus = STATE_DESTROY;
+        mFragment = null;
     }
 
     public void onStop() {
