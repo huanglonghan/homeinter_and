@@ -115,6 +115,13 @@ public class MultiListenerNestedScrollView extends NestedScrollView {
             if (headerView == null) {
                 throw new RuntimeException("must be initial headerView!");
             }
+            if (headerView.getParent() != null) {
+                ((ViewGroup) (headerView.getParent())).removeView(headerView);
+            }
+
+            if (contentView.getParent() != null) {
+                ((ViewGroup) (contentView.getParent())).removeView(contentView);
+            }
             linearLayout.addView(headerView);
             linearLayout.addView(contentView);
             addView(linearLayout);

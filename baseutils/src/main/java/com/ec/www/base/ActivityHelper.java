@@ -55,16 +55,17 @@ public class ActivityHelper implements IStatus {
     }
 
     public void onPostCreate() {
+        curStatus = STATE_CREATE;
         if (!EventBus.getDefault().isRegistered(mActivity)) {
             EventBus.getDefault().register(mActivity);
         }
-        curStatus = STATE_CREATE;
     }
 
     public void onStart() {
-        if (mGlide != null)
-            mGlide.onStart();
         curStatus = STATE_START;
+        if (mGlide != null) {
+            mGlide.onStart();
+        }
     }
 
     public void onResume() {
@@ -76,36 +77,43 @@ public class ActivityHelper implements IStatus {
     }
 
     public void onStop() {
-        if (mGlide != null)
-            mGlide.onStop();
         curStatus = STATE_STOP;
+        if (mGlide != null) {
+            mGlide.onStop();
+        }
     }
 
     public void onDestroy() {
+        curStatus = STATE_DESTROY;
         ActivityManager.getInstance().remove(mActivity);
         if (mUnbinder != null) {
             mUnbinder.unbind();
-            mUnbinder = null;
         }
         if (mGlide != null) {
             mGlide.onDestroy();
-            mGlide = null;
         }
         if (EventBus.getDefault().isRegistered(mActivity)) {
             EventBus.getDefault().unregister(mActivity);
         }
-        curStatus = STATE_DESTROY;
+
+        mUnbinder = null;
+        mFragmentManager = null;
+        mCurrentFragment = null;
+        mGlide = null;
+        mDialogFragment = null;
         mActivity = null;
     }
 
     public void onLowMemory() {
-        if (mGlide != null)
+        if (mGlide != null) {
             mGlide.onLowMemory();
+        }
     }
 
     public void onTrimMemory(int level) {
-        if (mGlide != null)
+        if (mGlide != null) {
             mGlide.onTrimMemory(level);
+        }
     }
 
     @Override

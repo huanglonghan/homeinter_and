@@ -38,7 +38,7 @@ public abstract class AbstractFragment<M> extends Fragment implements ICallbackV
     @Override
     public final View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mView == null) {
-            mView = onBuildVIew(inflater, container, savedInstanceState);
+            mView = onBuildView(inflater, container, savedInstanceState);
             if (mView ==null) {
                 throw new RuntimeException("must be inflater view");
             }
@@ -48,7 +48,7 @@ public abstract class AbstractFragment<M> extends Fragment implements ICallbackV
         return mView;
     }
 
-    public View onBuildVIew(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onBuildView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         int resId = getContentLayoutId();
         switch (resId) {
             case 0:
@@ -86,15 +86,9 @@ public abstract class AbstractFragment<M> extends Fragment implements ICallbackV
     }
 
     @Override
-    public void onDestroy() {
-        mHelper.onDestroy();
-        super.onDestroy();
-    }
-
-    @Override
-    public void onStop() {
-        mHelper.onStop();
-        super.onStop();
+    public void onStart() {
+        super.onStart();
+        mHelper.onStart();
     }
 
     @Override
@@ -110,15 +104,21 @@ public abstract class AbstractFragment<M> extends Fragment implements ICallbackV
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        mHelper.onStart();
+    public void onStop() {
+        mHelper.onStop();
+        super.onStop();
     }
 
     @Override
     public void onLowMemory() {
         mHelper.onLowMemory();
         super.onLowMemory();
+    }
+
+    @Override
+    public void onDestroy() {
+        mHelper.onDestroy();
+        super.onDestroy();
     }
 
     @Subscribe

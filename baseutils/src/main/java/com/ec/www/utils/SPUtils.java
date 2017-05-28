@@ -12,26 +12,26 @@ import java.util.Map;
 /**
  * Created by huang 2017/04/21
  */
-public class SPUtil {
+public class SPUtils {
 
     private static final String DEFAULT_CONFIG_FILE_NAME = "app.conf";
 
-    public SPUtil(SharedPreferences preferences) {
+    public SPUtils(SharedPreferences preferences) {
         mPreferences = preferences;
     }
 
     private SharedPreferences mPreferences;
 
-    private SPUtil() {
+    private SPUtils() {
         mPreferences = getSharedPreference(DEFAULT_CONFIG_FILE_NAME);
     }
 
-    public static SPUtil init(String fileName) {
-        return new SPUtil(getSharedPreference(fileName));
+    public static SPUtils init(String fileName) {
+        return new SPUtils(getSharedPreference(fileName));
     }
 
-    public static SPUtil init() {
-        return new SPUtil();
+    public static SPUtils init() {
+        return new SPUtils();
     }
 
     /**

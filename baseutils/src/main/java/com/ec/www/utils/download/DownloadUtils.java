@@ -18,7 +18,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class DownloadManager {
+public class DownloadUtils {
 
     private HashMap<String, Call> mDownCalls; //用来存放各个下载的请求
     private OkHttpClient mClient; //OKHttpClient;
@@ -26,25 +26,25 @@ public class DownloadManager {
 
     private static class DOWNLOAD_MANAGER_REQ {
         static {
-            DOWNLOAD_UTILS = new DownloadManager();
+            DOWNLOAD_UTILS = new DownloadUtils();
         }
 
-        private static final DownloadManager DOWNLOAD_UTILS;
+        private static final DownloadUtils DOWNLOAD_UTILS;
     }
 
-    private DownloadManager() {
+    private DownloadUtils() {
         init();
     }
 
-    public static DownloadManager getInstance() {
-        return DownloadManager.DOWNLOAD_MANAGER_REQ.DOWNLOAD_UTILS;
+    public static DownloadUtils getInstance() {
+        return DownloadUtils.DOWNLOAD_MANAGER_REQ.DOWNLOAD_UTILS;
     }
 
     public String getSavePath() {
         return mSavePath;
     }
 
-    public DownloadManager setSavePath(String savePath) {
+    public DownloadUtils setSavePath(String savePath) {
         mSavePath = savePath;
         return this;
     }
@@ -55,16 +55,23 @@ public class DownloadManager {
         mClient = new OkHttpClient.Builder().build();
     }
 
+
+    public DownloadUtils download(String url, DownLoadSubscriber downLoadSubscriber) {
+        download(url.substring(url.lastIndexOf("/")), url, downLoadSubscriber);
+        return this;
+    }
+
     /**
      * 开始下载
      *
+     * @param fileName           存储时的文件名
      * @param url                下载请求的网址
      * @param downLoadSubscriber 用来回调的接口
      */
-    public DownloadManager download(String url, DownLoadSubscriber downLoadSubscriber) {
+    public DownloadUtils download(String fileName, String url, DownLoadSubscriber downLoadSubscriber) {
         Observable.just(url)
                 .filter(s -> !mDownCalls.containsKey(s))//call的map已经有了,就证明正在下载,则这次不下载
-                .flatMap(s -> Observable.just(createDownInfo(s)))
+                .flatMap(s -> Observable.just(createDownInfo(fileName, s)))
                 .map(this::getRealFileName)//检测本地文件夹,生成新的文件名
                 .flatMap(DownloadOnSubscribe::new)//下载
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -74,7 +81,7 @@ public class DownloadManager {
         return this;
     }
 
-    public DownloadManager cancel(String url) {
+    public DownloadUtils cancel(String url) {
         Call call = mDownCalls.get(url);
         if (call != null) {
             call.cancel();//取消
@@ -83,17 +90,17 @@ public class DownloadManager {
         return this;
     }
 
+
     /**
      * 创建DownInfo
      *
      * @param url 请求网址
      * @return DownInfo
      */
-    private DownloadInfo createDownInfo(String url) {
+    private DownloadInfo createDownInfo(String fileName, String url) {
         DownloadInfo downloadInfo = new DownloadInfo(url);
         long contentLength = getContentLength(url);//获得文件大小
         downloadInfo.setTotal(contentLength);
-        String fileName = url.substring(url.lastIndexOf("/"));
         downloadInfo.setFileName(fileName);
         return downloadInfo;
     }

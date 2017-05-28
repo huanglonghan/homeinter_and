@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ec.www.BuildConfig;
 import com.ec.www.R;
@@ -81,12 +82,22 @@ public class CommonUtils {
      * @param time 要延迟的时间
      * @return
      */
-    public static Observable<Integer> setDelayCallback(int time) {
-        if (time < 0) time = 0;
-        final int countTime = time;
-        return Observable.interval(0, 1, TimeUnit.SECONDS)
-                .map(increaseTime -> countTime - increaseTime.intValue())
-                .take(countTime + 1)
+    public static Observable<Integer> setDelayObserver(int time) {
+        return setDelayObserver(time, 1, TimeUnit.SECONDS);
+    }
+
+    /**
+     * 延时函数
+     *
+     * @param interval 要延迟的时间
+     * @param unit     时间单位
+     * @return
+     */
+    public static Observable<Integer> setDelayObserver(int repeat, int interval, TimeUnit unit) {
+        if (interval < 0) interval = 0;
+        final Integer[] count = {repeat};
+        return Observable.interval(0, interval, unit)
+                .map(increaseTime -> --count[0]).take(repeat + 1)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
@@ -98,7 +109,7 @@ public class CommonUtils {
      */
     public static void setDelaySendMsg(TextView view, Fragment resource) {
         String strFormat = resource.getString(R.string.msg_tip);
-        CommonUtils.setDelayCallback(SEND_MSG_INTERVAL)
+        CommonUtils.setDelayObserver(SEND_MSG_INTERVAL)
                 .subscribe(new DefaultObserver<Integer>() {
 
                     @Override
@@ -503,22 +514,22 @@ public class CommonUtils {
 
     public static boolean isFirstOpen() {
         String IS_FIRST_OPEN = "is_first_open";
-        return SPUtil.init().getBoolean(IS_FIRST_OPEN, true);
+        return SPUtils.init().getBoolean(IS_FIRST_OPEN, true);
     }
 
     public static void setFirstOpen(boolean isFirst) {
         String IS_FIRST_OPEN = "is_first_open";
-        SPUtil.init().putBoolean(IS_FIRST_OPEN, isFirst);
+        SPUtils.init().putBoolean(IS_FIRST_OPEN, isFirst);
     }
 
     public static boolean isLogin() {
         String IS_FIRST_OPEN = "is_login";
-        return SPUtil.init().getBoolean(IS_FIRST_OPEN, false);
+        return SPUtils.init().getBoolean(IS_FIRST_OPEN, false);
     }
 
     public static void setLogin(boolean isLogin) {
         String IS_LOGIN = "is_login";
-        SPUtil.init().putBoolean(IS_LOGIN, isLogin);
+        SPUtils.init().putBoolean(IS_LOGIN, isLogin);
     }
 
     public static String getApplicationName(Context context) {
@@ -550,9 +561,13 @@ public class CommonUtils {
         }
     }
 
-    public static void loadImage(ImageView view, String url,
-                                 Function<DrawableRequestBuilder<String>, DrawableRequestBuilder<String>> customCallback) {
-        DrawableRequestBuilder<String> builder = Glide.with(view.getContext()).load(url).diskCacheStrategy(DiskCacheStrategy.ALL);
+    public static <T> void loadImage(ImageView view, T t,
+                                     Function<DrawableRequestBuilder<T>, DrawableRequestBuilder<T>> customCallback) {
+        DrawableRequestBuilder<T> builder = Glide.with(view.getContext())
+                .load(t)
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .crossFade();
         if (customCallback != null) {
             try {
                 builder = customCallback.apply(builder);
@@ -563,8 +578,8 @@ public class CommonUtils {
         builder.into(view);
     }
 
-    public static void loadImage(ImageView view, String url) {
-        loadImage(view, url, null);
+    public static <T> void loadImage(ImageView view, T t) {
+        loadImage(view, t, null);
     }
 
     public static int getAdapterPosition(RecyclerView view, View tagView) {

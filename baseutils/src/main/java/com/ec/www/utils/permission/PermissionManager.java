@@ -9,7 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
 import com.ec.www.base.AbstractApplication;
-import com.ec.www.utils.SPUtil;
+import com.ec.www.utils.SPUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,11 +23,11 @@ public class PermissionManager {
     private static final String fileName = "permission.conf";
     private static final String KEY_PREV_PERMISSIONS = "previous_permissions";
     private static final String KEY_IGNORED_PERMISSIONS = "ignored_permissions";
-    private SPUtil spUtil;
+    private SPUtils spUtil;
     private ArrayList<PermissionRequest> permissionRequests = new ArrayList<>();
 
     private PermissionManager() {
-        spUtil = SPUtil.init(fileName);
+        spUtil = SPUtils.init(fileName);
     }
 
     private static class PERMISSION_MANAGER_INSTANCE {

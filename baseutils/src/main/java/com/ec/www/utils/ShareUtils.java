@@ -56,7 +56,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by huang on 2017/3/21.
  */
 
-public class ShareUtil {
+public class ShareUtils {
 
     private Tencent tencent;
     private IWXAPI IWXApi;
@@ -76,13 +76,13 @@ public class ShareUtil {
 
     private static class SHARE_UTILS {
         static {
-            SHARE_UTILS = new ShareUtil();
+            SHARE_UTILS = new ShareUtils();
         }
 
-        private static final ShareUtil SHARE_UTILS;
+        private static final ShareUtils SHARE_UTILS;
     }
 
-    private ShareUtil() {
+    private ShareUtils() {
         //QQ回调
         mUiListener = new IUiListener() {
             @Override
@@ -102,26 +102,26 @@ public class ShareUtil {
         };
     }
 
-    public static ShareUtil getInstance() {
+    public static ShareUtils getInstance() {
         return SHARE_UTILS.SHARE_UTILS;
     }
 
-    public static ShareUtil initQQ(String QQId) {
-        ShareUtil utils = ShareUtil.getInstance();
+    public static ShareUtils initQQ(String QQId) {
+        ShareUtils utils = ShareUtils.getInstance();
         QQ_ID = QQId;
         utils.init();
         return utils;
     }
 
-    public static ShareUtil initWeChat(String weChatKey) {
-        ShareUtil utils = ShareUtil.getInstance();
+    public static ShareUtils initWeChat(String weChatKey) {
+        ShareUtils utils = ShareUtils.getInstance();
         WECHAT_KEY = weChatKey;
         utils.init();
         return utils;
     }
 
-    public static ShareUtil initWeiBo(String weiBoKey) {
-        ShareUtil utils = ShareUtil.getInstance();
+    public static ShareUtils initWeiBo(String weiBoKey) {
+        ShareUtils utils = ShareUtils.getInstance();
         WEIBO_KEY = weiBoKey;
         utils.init();
         return utils;

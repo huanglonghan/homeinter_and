@@ -31,43 +31,47 @@ public class FragmentHelper implements IStatus {
     }
 
     public void bindButterKnife(View view) {
-        if (mUnbinder == null)
+        if (mUnbinder == null) {
             mUnbinder = ButterKnife.bind(mFragment, view);
+        }
     }
 
     protected void initPrepare() {
+        curStatus = STATE_CREATE;
         if (!EventBus.getDefault().isRegistered(mFragment)) {
             EventBus.getDefault().register(mFragment);
         }
-        curStatus = STATE_CREATE;
     }
 
     public void onDestroy() {
+        curStatus = STATE_DESTROY;
         if (mUnbinder != null) {
             mUnbinder.unbind();
-            mUnbinder = null;
         }
         if (mGlide != null) {
             mGlide.onDestroy();
-            mGlide = null;
         }
         if (EventBus.getDefault().isRegistered(mFragment)) {
             EventBus.getDefault().unregister(mFragment);
         }
-        curStatus = STATE_DESTROY;
+
         mFragment = null;
+        mUnbinder = null;
+        mGlide = null;
     }
 
     public void onStop() {
-        if (mGlide != null)
-            mGlide.onStop();
         curStatus = STATE_STOP;
+        if (mGlide != null) {
+            mGlide.onStop();
+        }
     }
 
     public void onStart() {
-        if (mGlide != null)
-            mGlide.onStart();
         curStatus = STATE_START;
+        if (mGlide != null) {
+            mGlide.onStart();
+        }
     }
 
     public void onResume() {
@@ -79,8 +83,9 @@ public class FragmentHelper implements IStatus {
     }
 
     public void onLowMemory() {
-        if (mGlide != null)
+        if (mGlide != null) {
             mGlide.onLowMemory();
+        }
     }
 
     public RequestManager getGlide() {

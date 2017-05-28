@@ -2,7 +2,7 @@ package com.ec.www.base.http;
 
 import com.annimon.stream.Stream;
 import com.annimon.stream.function.Function;
-import com.ec.www.utils.SPUtil;
+import com.ec.www.utils.SPUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -19,7 +19,7 @@ import okhttp3.Cookie;
 
 public class SPStoreMap extends StoreMap<ArrayList<Cookie>> {
 
-    private SPUtil mSPUtil;
+    private SPUtils mSPUtil;
     private Gson mGson;
 
     @Override
@@ -35,7 +35,7 @@ public class SPStoreMap extends StoreMap<ArrayList<Cookie>> {
     @Override
     void init() {
         //初始化数据
-        mSPUtil = SPUtil.init("sp_conf.sve");
+        mSPUtil = SPUtils.init("sp_conf.sve");
         mGson = new Gson();
         Map<String, String> all = (Map<String, String>) mSPUtil.getAll();
         Stream.of(all)

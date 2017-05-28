@@ -115,21 +115,27 @@ public abstract class AbstractActivity extends AppCompatActivity implements Swip
     }
 
     @Override
-    protected void onDestroy() {
-        mActivityHelper.onDestroy();
-        super.onDestroy();
+    protected void onStart() {
+        super.onStart();
+        mActivityHelper.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mActivityHelper.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        mActivityHelper.onPause();
+        super.onPause();
     }
 
     @Override
     protected void onStop() {
         mActivityHelper.onStop();
         super.onStop();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mActivityHelper.onStart();
     }
 
     @Override
@@ -145,15 +151,9 @@ public abstract class AbstractActivity extends AppCompatActivity implements Swip
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        mActivityHelper.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        mActivityHelper.onPause();
-        super.onPause();
+    protected void onDestroy() {
+        mActivityHelper.onDestroy();
+        super.onDestroy();
     }
 
     @Subscribe
