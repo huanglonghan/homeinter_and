@@ -3,16 +3,12 @@ package com.ec.www.view.swiperecycler;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.ec.www.R;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.widget.ListPopupWindow.WRAP_CONTENT;

@@ -39,12 +39,10 @@ public class SpaceItem extends RecyclerView.ItemDecoration {
         super.getItemOffsets(outRect, view, parent, state);
         int index = parent.getChildAdapterPosition(view);
         if (index < 0 || index > parent.getAdapter().getItemCount()) return;
-        if (parent.getAdapter().getItemViewType(index) == Adapter.TYPE_TAG_DEFAULT) {
-            if (mOrientation == VERTICAL_LIST) {
-                outRect.set(0, 0, 0, mSpace);
-            } else {
-                outRect.set(0, 0, mSpace, 0);
-            }
+        if (mOrientation == VERTICAL_LIST) {
+            outRect.set(0, 0, 0, mSpace);
+        } else {
+            outRect.set(0, 0, mSpace, 0);
         }
     }
 }

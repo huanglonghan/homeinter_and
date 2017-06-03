@@ -15,14 +15,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ec.www.R;
-
 
 /**
  * Created by huang on 2017/1/6.
  */
 
-public class HeaderView extends LinearLayout{
+public class HeaderView extends LinearLayout {
 
     public final static int STATE_NORMAL = 0;
     public final static int STATE_RELEASE_TO_REFRESH = 1;
@@ -80,8 +78,8 @@ public class HeaderView extends LinearLayout{
         mMeasuredHeight = getMeasuredHeight();
         setGravity(Gravity.CENTER_HORIZONTAL);
         mContainer = (LinearLayout) findViewById(R.id.container);
-        mContainer.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0));
-        this.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        mContainer.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 0));
+        this.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
 
@@ -191,7 +189,7 @@ public class HeaderView extends LinearLayout{
         if (height < 0)
             height = 0;
 
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
+        LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
         lp.height = height;
         mContainer.setLayoutParams(lp);
     }

@@ -1,6 +1,5 @@
 package com.ec.www.view.swiperecycler;
 
-import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -8,14 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.RequestManager;
-
 import java.util.List;
 
 /**
  * Created by huang on 2016/1/28.
  */
-public abstract class SwipeAdapter<T> extends Adapter<T, RecyclerView.ViewHolder> {
+public abstract class SwipeAdapter<T> extends BaseAdapter {
 
     private static final int TYPE_REFRESH_HEADER = -10001;
     private static final int TYPE_HEADER = -10002;
