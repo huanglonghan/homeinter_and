@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-package com.ec.www.view.swiperecycler.base.multitype;
-
-import android.support.annotation.NonNull;
+package com.ec.www.view.swiperecycler.base.multitype
 
 /**
  * @author drakeet
  */
-public class BinderNotFoundException extends RuntimeException {
+internal class DefaultLinker<T> : Linker<T> {
 
-    public BinderNotFoundException(@NonNull Class<?> clazz) {
-        super("Do you have registered the binder for {className}.class in the adapter/pool?"
-            .replace("{className}", clazz.getSimpleName()));
+    override fun index(t: T): Int {
+        return 0
     }
 }

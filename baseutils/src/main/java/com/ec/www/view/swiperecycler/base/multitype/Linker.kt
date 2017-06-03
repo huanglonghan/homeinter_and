@@ -14,24 +14,31 @@
  * limitations under the License.
  */
 
-package com.ec.www.view.swiperecycler.base.multitype;
+package com.ec.www.view.swiperecycler.base.multitype
 
-import android.support.annotation.NonNull;
-
+import android.support.annotation.IntRange
 
 /**
- * An interface to link the items and binders by the classes of binders.
- *
+ * An interface to link the items and binders by array integer index.
+
  * @author drakeet
  */
-public interface ClassLinker<T> {
+interface Linker<T> {
 
     /**
-     * Returns the class of your registered binders for your item.
+     * Returns the index of your registered binders for your item. The result should be in range of
+     * `[0, one-to-multiple-binders.length)`.
+
      *
+     * Note: The argument of [OneToManyFlow.to] is the
+     * one-to-multiple-binders.
+
      * @param t Your item data
+     * *
      * @return The index of your registered binders
-     * @see OneToManyEndpoint#withClassLinker(me.drakeet.multitype.ClassLinker)
+     * *
+     * @see OneToManyFlow.to
+     * @see OneToManyEndpoint.withLinker
      */
-    @NonNull Class<? extends ItemViewBinder<T, ?>> index(@NonNull T t);
+    @IntRange(from = 0) fun index(t: T): Int
 }

@@ -14,30 +14,10 @@
  * limitations under the License.
  */
 
-package com.ec.www.view.swiperecycler.base.multitype;
-
-import android.support.annotation.NonNull;
+package com.ec.www.view.swiperecycler.base.multitype
 
 /**
- * End-operators for one-to-many.
- *
  * @author drakeet
  */
-public interface OneToManyEndpoint<T> {
-
-    /**
-     * Sets a linker to link the items and binders by array index.
-     *
-     * @param linker the row linker
-     * @see me.drakeet.multitype.Linker
-     */
-    void withLinker(@NonNull Linker<T> linker);
-
-    /**
-     * Sets a class linker to link the items and binders by the class instance of binders.
-     *
-     * @param classLinker the class linker
-     * @see ClassLinker
-     */
-    void withClassLinker(@NonNull ClassLinker<T> classLinker);
-}
+class BinderNotFoundException(clazz: Class<*>) : RuntimeException("Do you have registered the binder for {className}.class in the adapter/pool?"
+        .replace("{className}", clazz.simpleName))

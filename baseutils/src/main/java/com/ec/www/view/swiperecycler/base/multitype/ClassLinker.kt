@@ -14,17 +14,24 @@
  * limitations under the License.
  */
 
-package com.ec.www.view.swiperecycler.base.multitype;
+package com.ec.www.view.swiperecycler.base.multitype
 
-import android.support.annotation.NonNull;
 
 /**
+ * An interface to link the items and binders by the classes of binders.
+
  * @author drakeet
  */
-final class DefaultLinker<T> implements Linker<T> {
+interface ClassLinker<T> {
 
-    @Override
-    public int index(@NonNull T t) {
-        return 0;
-    }
+    /**
+     * Returns the class of your registered binders for your item.
+
+     * @param t Your item data
+     * *
+     * @return The index of your registered binders
+     * *
+     * @see OneToManyEndpoint.withClassLinker
+     */
+    fun index(t: T): Class<out ItemViewBinder<T, *>>
 }
