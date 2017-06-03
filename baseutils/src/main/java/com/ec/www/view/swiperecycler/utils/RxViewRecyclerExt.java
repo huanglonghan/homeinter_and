@@ -5,12 +5,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.ec.www.view.swiperecycler.base.BaseItemViewBuild;
+import com.ec.www.view.swiperecycler.SwipeRecyclerView;
+
 import io.reactivex.Observable;
-import pw.bmyo.www.swiperecycler.BaseItemViewBuild;
-import pw.bmyo.www.swiperecycler.SwipeRecyclerView;
 
-import static pw.bmyo.www.swiperecycler.utils.Preconditions.checkNotNull;
-
+import static com.ec.www.base.rxview.Preconditions.checkNotNull;
 
 
 /*

@@ -7,14 +7,14 @@ import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.ec.www.view.swiperecycler.base.BaseItemViewBuild;
+import com.ec.www.view.swiperecycler.SwipeRecyclerView;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.MainThreadDisposable;
-import pw.bmyo.www.swiperecycler.BaseItemViewBuild;
-import pw.bmyo.www.swiperecycler.SwipeRecyclerView;
 
-import static pw.bmyo.www.swiperecycler.utils.Preconditions.checkMainThread;
-
+import static com.ec.www.base.rxview.Preconditions.checkMainThread;
 
 /**
  * Created by huang on 2017/1/8.

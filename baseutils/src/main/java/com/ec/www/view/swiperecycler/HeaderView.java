@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ec.www.R;
+
 
 /**
  * Created by huang on 2017/1/6.

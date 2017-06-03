@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ec.www.view.swiperecycler.base.BaseAdapter;
+
 import java.util.List;
 
 /**
